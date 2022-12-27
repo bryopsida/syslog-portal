@@ -25,7 +25,7 @@
     "inversify"
   ],
   "author": "",
-  "license": "Unlicense",
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/bryopsida/syslog-portal/issues"
   },
