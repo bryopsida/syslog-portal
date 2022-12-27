@@ -1,0 +1,21 @@
+name: CI
+on:
+  push:
+    branches: ["main"]
+  pull_request:
+    branches: ["main"]
+
+jobs:
+  validate-node:
+    name: "Validate"
+    uses: curium-rocks/flows/.github/workflows/node-ts.yml@main
+    secrets:
+      SONARQUBE_KEY: ${{ secrets.SONARQUBE_KEY }}
+  build-container:
+    name: "Build container image"
+    uses: curium-rocks/flows/.github/workflows/oci-build-image.yml@main
+    needs: validate-node
+    with:
+      registry: ghcr.io/bryopsida
+      image_name: node-ts-starter
+      push_in_pr: true

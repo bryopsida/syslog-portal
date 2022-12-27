@@ -1,0 +1,8 @@
+{
+  "echo": {
+    "delay": 1000
+  },
+  "logger": {
+    "level": "debug"
+  }
+}
