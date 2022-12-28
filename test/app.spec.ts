@@ -20,7 +20,7 @@ describe('app', () => {
       startListening: () => {
         return Promise.resolve()
       },
-    })
+    } as any)
     container.bind<IServer>(TYPES.Services.Server).toConstantValue(mockedServer)
     container
       .bind<Logger>(TYPES.Logger)

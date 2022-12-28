@@ -1,14 +1,16 @@
-import { IServer } from '../interfaces/server'
-import { IConfig } from '../models/config'
+import { ILogMessageListener } from '../interfaces/server'
+import { BaseServer } from './baseServer'
 
-export class TCPServer implements IServer {
-  private readonly port: number
-
-  constructor(config: IConfig) {
-    this.port = config.serverPort
+export class TCPServer extends BaseServer {
+  startListening(): Promise<void> {
+    throw new Error('Method not implemented.')
   }
 
-  startListening(): Promise<void> {
+  onLogMessage(listener: ILogMessageListener): void {
+    throw new Error('Method not implemented.')
+  }
+
+  offLogMessage(listener: ILogMessageListener): void {
     throw new Error('Method not implemented.')
   }
 }
