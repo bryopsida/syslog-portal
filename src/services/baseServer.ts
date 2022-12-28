@@ -11,6 +11,7 @@ export abstract class BaseServer extends EventEmitter implements IServer {
   }
 
   abstract startListening(): Promise<void>
+  abstract close(): Promise<void>
   abstract onLogMessage(listener: ILogMessageListener): void
   abstract offLogMessage(listener: ILogMessageListener): void
 }

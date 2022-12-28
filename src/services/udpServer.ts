@@ -1,18 +1,30 @@
-import { injectable } from 'inversify'
 import { ILogMessageListener } from '../interfaces/server'
 import { BaseServer } from './baseServer'
+import { RemoteInfo, Socket, createSocket } from 'node:dgram'
 
-@injectable()
 export class UDPServer extends BaseServer {
+  server?: Socket
   startListening(): Promise<void> {
-    throw new Error('Method not implemented.')
+    this.server = createSocket(
+      {
+        type: 'udp4',
+      },
+      (msg: Buffer, rinfo: RemoteInfo) => {
+        const stringMsg = msg.toString('utf8')
+        console.log(stringMsg, rinfo)
+      }
+    )
+    return new Promise((resolve) => {
+      return this.server?.bind(this._port, resolve)
+    })
   }
 
-  onLogMessage(listener: ILogMessageListener): void {
-    throw new Error('Method not implemented.')
+  close(): Promise<void> {
+    this.server?.close()
+    return Promise.resolve()
   }
 
-  offLogMessage(listener: ILogMessageListener): void {
-    throw new Error('Method not implemented.')
-  }
+  onLogMessage(listener: ILogMessageListener): void {}
+
+  offLogMessage(listener: ILogMessageListener): void {}
 }
