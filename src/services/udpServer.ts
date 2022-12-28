@@ -1,6 +1,8 @@
+import { injectable } from 'inversify'
 import { ILogMessageListener } from '../interfaces/server'
 import { BaseServer } from './baseServer'
 
+@injectable()
 export class UDPServer extends BaseServer {
   startListening(): Promise<void> {
     throw new Error('Method not implemented.')
