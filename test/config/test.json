@@ -1,6 +1,7 @@
 {
-  "echo": {
-    "delay": 1000
+  "server": {
+    "serverType": "TCP",
+    "serverPort": 1000
   },
   "logger": {
     "level": "debug"
