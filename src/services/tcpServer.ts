@@ -1,4 +1,3 @@
-import { ILogMessageListener } from '../interfaces/server'
 import { BaseServer } from './baseServer'
 import { Server, Socket, createServer } from 'node:net'
 
@@ -17,8 +16,11 @@ export class TCPServer extends BaseServer {
         clientSocket.end()
       })
       clientSocket.on('data', (buffer) => {
-        const data = buffer.toString('utf8')
-        console.log(data)
+        this.parseMessage(buffer, {
+          address: clientSocket.remoteAddress,
+          port: clientSocket.remotePort,
+          family: clientSocket.remoteFamily,
+        })
       })
     })
     return Promise.resolve()
@@ -33,8 +35,4 @@ export class TCPServer extends BaseServer {
       this.connections.forEach((c) => c.end())
     })
   }
-
-  onLogMessage(listener: ILogMessageListener): void {}
-
-  offLogMessage(listener: ILogMessageListener): void {}
 }

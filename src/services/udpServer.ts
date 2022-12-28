@@ -1,4 +1,3 @@
-import { ILogMessageListener } from '../interfaces/server'
 import { BaseServer } from './baseServer'
 import { RemoteInfo, Socket, createSocket } from 'node:dgram'
 
@@ -10,8 +9,7 @@ export class UDPServer extends BaseServer {
         type: 'udp4',
       },
       (msg: Buffer, rinfo: RemoteInfo) => {
-        const stringMsg = msg.toString('utf8')
-        console.log(stringMsg, rinfo)
+        this.parseMessage(msg, rinfo)
       }
     )
     return new Promise((resolve) => {
@@ -23,8 +21,4 @@ export class UDPServer extends BaseServer {
     this.server?.close()
     return Promise.resolve()
   }
-
-  onLogMessage(listener: ILogMessageListener): void {}
-
-  offLogMessage(listener: ILogMessageListener): void {}
 }
