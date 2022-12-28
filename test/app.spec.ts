@@ -1,14 +1,8 @@
-import { describe, it, expect } from "@jest/globals"
-import main from "../src/app"
-import "reflect-metadata"
-import { Container } from "inversify"
+import { describe, it, expect } from '@jest/globals'
+import 'reflect-metadata'
 
-describe("app", () => {
-  it("should echo a message back", async () => {
-    const message = "123"
-    const appContainer = require("../src/inversify.config")
-      .appContainer as Container
-    const result = await main(appContainer, message)
-    expect(result).toEqual(message)
+describe('app', () => {
+  it('should have a test case', async () => {
+    expect(false).toBeTruthy()
   })
 })

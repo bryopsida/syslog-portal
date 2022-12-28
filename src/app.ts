@@ -1,27 +1,20 @@
-import { Container } from "inversify"
-import { TYPES } from "./types"
-import { IEcho } from "./services/echo"
-import { Logger } from "pino"
+import { Container } from 'inversify'
+import { TYPES } from './types'
+import { Logger } from 'pino'
+import { IServer } from './interfaces/server'
 
-export default async function main(
-  appContainer: Container,
-  message: string
-): Promise<string> {
-  const echoService = appContainer.get<IEcho>(TYPES.Services.Echo)
+export default async function main(appContainer: Container): Promise<void> {
+  const server = appContainer.get<IServer>(TYPES.Services.Server)
   const log = appContainer.get<Logger>(TYPES.Logger)
-  const result = await echoService.echo(message)
-  log.info(`Response ${result}`)
-  return result
+  log.info('Starting to listen for connections')
+  await server.startListening()
+  log.info('Now serving connections')
 }
 
 if (require.main === module) {
-  const appContainer = require("./inversify.config").appContainer as Container
+  const appContainer = require('./inversify.config').appContainer as Container
   const log = appContainer.get<Logger>(TYPES.Logger)
-  main(appContainer, "test")
-    .then(() => {
-      log.info("Finished")
-    })
-    .catch((err) => {
-      log.error(err, `Error while running: ${err.message}`)
-    })
+  main(appContainer).catch((err) => {
+    log.error(err, `Error while launching: ${err.message}`)
+  })
 }

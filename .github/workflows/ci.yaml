@@ -1,18 +1,18 @@
 name: CI
 on:
   push:
-    branches: ["main"]
+    branches: ['main']
   pull_request:
-    branches: ["main"]
+    branches: ['main']
 
 jobs:
   validate-node:
-    name: "Validate"
+    name: 'Validate'
     uses: curium-rocks/flows/.github/workflows/node-ts.yml@main
     secrets:
       SONARQUBE_KEY: ${{ secrets.SONARQUBE_KEY }}
   build-container:
-    name: "Build container image"
+    name: 'Build container image'
     uses: curium-rocks/flows/.github/workflows/oci-build-image.yml@main
     needs: validate-node
     with:

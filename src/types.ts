@@ -1,14 +1,15 @@
 const TYPES = {
   Services: {
-    Echo: Symbol.for("Echo"),
+    Server: Symbol.for('Server'),
   },
-  Logger: Symbol.for("Logger"),
+  Logger: Symbol.for('Logger'),
   Factories: {
-    LoggerFactory: Symbol.for("LoggerFactory"),
+    LoggerFactory: Symbol.for('LoggerFactory'),
+    ServerFactory: Symbol.for('ServerFactory'),
   },
   Configurations: {
-    Echo: Symbol.for("Config"),
-    Logger: Symbol.for("LoggerOptions"),
+    Main: Symbol.for('Config'),
+    Logger: Symbol.for('LoggerOptions'),
   },
 }
 export { TYPES }
