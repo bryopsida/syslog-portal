@@ -1,12 +1,23 @@
+import { injectable } from 'inversify'
 import { IServer } from '../interfaces/server'
-import { IConfig } from '../models/config'
+import { IConfig, ServerTypeEnum } from '../models/config'
+import { UDPServer } from '../services/udpServer'
+import { TCPServer } from '../services/tcpServer'
+import { Logger } from 'pino'
 
 export interface IServerFactory {
-  createServer(config: IConfig): IServer
+  createServer(config: IConfig, logger: Logger): IServer
 }
 
+@injectable()
 export class ServerFactory implements IServerFactory {
-  createServer(config: IConfig): IServer {
-    throw new Error('Method not implemented.')
+  createServer(config: IConfig, log: Logger): IServer {
+    if (config.serverType === ServerTypeEnum.TCP) {
+      log.info('Creating TCPServer')
+      return new TCPServer(config)
+    } else {
+      log.info('Creating UDPServer')
+      return new UDPServer(config)
+    }
   }
 }

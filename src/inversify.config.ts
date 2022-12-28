@@ -42,6 +42,7 @@ appContainer
       TYPES.Factories.ServerFactory
     )
     const config = ctx.container.get<IConfig>(TYPES.Configurations.Main)
-    return factory.createServer(config)
+    const logger = ctx.container.get<Logger>(TYPES.Logger)
+    return factory.createServer(config, logger)
   })
 export { appContainer }
