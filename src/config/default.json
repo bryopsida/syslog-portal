@@ -1,7 +1,15 @@
 {
   "server": {
-    "serverType": "TCP",
-    "serverPort": 1514
+    "serverType": "UDP",
+    "serverPort": 1514,
+    "archiver": {
+      "enabled": true,
+      "type": "SQL_LITE"
+    },
+    "broadcaster": {
+      "enabled": true,
+      "type": "KAFKA"
+    }
   },
   "logger": {
     "level": "info"

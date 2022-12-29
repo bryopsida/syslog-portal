@@ -4,6 +4,6 @@
     "serverPort": 1000
   },
   "logger": {
-    "level": "debug"
+    "level": "trace"
   }
 }
