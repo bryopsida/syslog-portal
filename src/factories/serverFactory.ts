@@ -14,10 +14,10 @@ export class ServerFactory implements IServerFactory {
   createServer(config: IConfig, log: Logger): IServer {
     if (config.serverType === ServerTypeEnum.TCP) {
       log.info('Creating TCPServer')
-      return new TCPServer(config)
+      return new TCPServer(config, log)
     } else {
       log.info('Creating UDPServer')
-      return new UDPServer(config)
+      return new UDPServer(config, log)
     }
   }
 }

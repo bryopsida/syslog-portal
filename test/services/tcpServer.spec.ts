@@ -1,4 +1,4 @@
-import { describe, it } from '@jest/globals'
+import { describe, it, expect } from '@jest/globals'
 import pino from 'pino'
 import { TCPServer } from '../../src/services/tcpServer'
 import { ServerTypeEnum } from '../../src/models/config'
@@ -33,20 +33,35 @@ describe('TCPServer', () => {
       ],
     })
     const log = pino(transport)
-    const server = new TCPServer({
-      serverPort: 8100,
-      serverType: ServerTypeEnum.TCP,
-    })
+    const logger = pino()
+    const server = new TCPServer(
+      {
+        serverPort: 8100,
+        serverType: ServerTypeEnum.TCP,
+      },
+      logger
+    )
     await server.startListening()
+    const state = {
+      called: false,
+    }
     server.onLogMessage({
       onLogMessage: (msg) => {
-        console.log(msg)
+        expect(msg.timestamp).toBeDefined()
+        expect(msg.facility).toBeDefined()
+        expect(msg.hostname).toBeDefined()
+        expect(msg.severity).toBeDefined()
+        expect(msg.modelVersion).toEqual(1)
+        expect(msg.message).toBeDefined()
+        const parsedMsg = JSON.parse(msg.message)
+        expect(parsedMsg.msg).toEqual('test')
+        state.called = true
         return Promise.resolve()
       },
     })
     log.info('test')
-    // TODO: add expectations
-    await new Promise((resolve) => setTimeout(resolve, 20000))
+    await new Promise((resolve) => setTimeout(resolve, 2500))
     await server.close()
+    expect(state.called).toBeTruthy()
   })
 })

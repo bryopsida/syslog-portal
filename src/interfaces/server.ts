@@ -1,6 +1,17 @@
 import EventEmitter from 'events'
+import { FACILITY, SEVERITY } from '../models/rfc5424'
 
-export interface ILogMessage {}
+export interface ILogMessage {
+  timestamp?: Date
+  severity: SEVERITY
+  facility: FACILITY
+  message: string
+  app?: string
+  procId?: number
+  msgId?: string
+  hostname?: string
+  modelVersion: number
+}
 export interface ILogMessageListener {
   onLogMessage(message: ILogMessage): Promise<any>
 }
