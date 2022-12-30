@@ -14,4 +14,7 @@ describe('inversify.config', () => {
   it('binds server service', () => {
     expect(appContainer.isBound(TYPES.Services.Server)).toBeTruthy()
   })
+  it('binds metric server service', () => {
+    expect(appContainer.isBound(TYPES.Services.MetricServer)).toBeTruthy()
+  })
 })

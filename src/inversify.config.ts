@@ -7,6 +7,7 @@ import { Logger, LoggerOptions } from 'pino'
 import { ILoggerFactory, LoggerFactory } from './logger/logger'
 import { IServerFactory, ServerFactory } from './factories/serverFactory'
 import { IServer } from './interfaces/server'
+import { MetricServer } from './services/metricServer'
 
 const appContainer = new Container()
 
@@ -25,6 +26,11 @@ appContainer
 appContainer
   .bind<IServerFactory>(TYPES.Factories.ServerFactory)
   .to(ServerFactory)
+
+appContainer
+  .bind<MetricServer>(TYPES.Services.MetricServer)
+  .to(MetricServer)
+  .inSingletonScope()
 
 appContainer
   .bind<Logger>(TYPES.Logger)
