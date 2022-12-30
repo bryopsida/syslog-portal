@@ -1,7 +1,15 @@
 {
   "server": {
     "serverType": "TCP",
-    "serverPort": 1000
+    "serverPort": 1000,
+    "archiver": {
+      "enabled": true,
+      "type": "MONGO"
+    },
+    "broadcaster": {
+      "enabled": true,
+      "type": "KAFKA"
+    }
   },
   "logger": {
     "level": "trace"

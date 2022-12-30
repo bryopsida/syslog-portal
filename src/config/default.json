@@ -4,7 +4,7 @@
     "serverPort": 1514,
     "archiver": {
       "enabled": true,
-      "type": "SQL_LITE"
+      "type": "MONGO"
     },
     "broadcaster": {
       "enabled": true,

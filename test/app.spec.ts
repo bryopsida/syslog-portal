@@ -5,6 +5,7 @@ import { Container } from 'inversify'
 import { TYPES } from '../src/types'
 import { LoggerFactory } from '../src/logger/logger'
 import { Logger } from 'pino'
+import { MetricServer } from '../src/services/metricServer'
 
 export interface IMain {
   (container: Container): Promise<void>
@@ -22,6 +23,9 @@ describe('app', () => {
       },
     } as any)
     container.bind<IServer>(TYPES.Services.Server).toConstantValue(mockedServer)
+    container
+      .bind<MetricServer>(TYPES.Services.MetricServer)
+      .toConstantValue({} as any)
     container
       .bind<Logger>(TYPES.Logger)
       .toConstantValue(new LoggerFactory({}).createLogger())
