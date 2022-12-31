@@ -2,6 +2,7 @@ import { describe, it, expect } from '@jest/globals'
 import pino from 'pino'
 import { TCPServer } from '../../src/services/tcpServer'
 import { ServerTypeEnum } from '../../src/models/config'
+import { HealthMonitor } from '../../src/services/healthMonitor'
 
 describe('TCPServer', () => {
   it('should emit messages when received', async () => {
@@ -34,12 +35,14 @@ describe('TCPServer', () => {
     })
     const log = pino(transport)
     const logger = pino()
+    const monitor = new HealthMonitor()
     const server = new TCPServer(
       {
         serverPort: 8100,
         serverType: ServerTypeEnum.TCP,
       },
-      logger
+      logger,
+      monitor
     )
     await server.startListening()
     const state = {

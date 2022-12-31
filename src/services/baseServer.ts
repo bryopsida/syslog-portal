@@ -3,6 +3,7 @@ import { ILogMessage, ILogMessageListener, IServer } from '../interfaces/server'
 import { IConfig } from '../models/config'
 import { Logger } from 'pino'
 import { FACILITY, PRI, SEVERITY } from '../models/rfc5424'
+import { IWatchDog } from '../interfaces/watchDog'
 
 const NIL = '-'
 
@@ -10,11 +11,14 @@ export abstract class BaseServer extends EventEmitter implements IServer {
   protected readonly _port: number
   protected readonly _log: Logger
   protected readonly _listeners = new Set<ILogMessageListener>()
+  protected readonly _healthMonitor: IWatchDog
+  protected _entityId?: string
 
-  constructor(config: IConfig, logger: Logger) {
+  constructor(config: IConfig, logger: Logger, watchDog: IWatchDog) {
     super()
     this._port = config.serverPort
     this._log = logger
+    this._healthMonitor = watchDog
   }
 
   abstract startListening(): Promise<void>
@@ -151,5 +155,9 @@ export abstract class BaseServer extends EventEmitter implements IServer {
 
   public offLogMessage(listener: ILogMessageListener): void {
     this._listeners.delete(listener)
+  }
+
+  protected pingMonitor(): void {
+    this._healthMonitor.kick(this._entityId as string)
   }
 }
