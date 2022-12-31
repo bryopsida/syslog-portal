@@ -1,3 +1,4 @@
+import 'reflect-metadata'
 import { describe, it, expect } from '@jest/globals'
 import pino from 'pino'
 import { TCPServer } from '../../src/services/tcpServer'
@@ -35,7 +36,7 @@ describe('TCPServer', () => {
     })
     const log = pino(transport)
     const logger = pino()
-    const monitor = new HealthMonitor()
+    const monitor = new HealthMonitor(logger)
     const server = new TCPServer(
       {
         serverPort: 8100,
