@@ -5,7 +5,7 @@ import { IServer } from './interfaces/server'
 import { MetricServer } from './services/metricServer'
 
 export default async function main(appContainer: Container): Promise<void> {
-  const server = appContainer.get<IServer>(TYPES.Services.Server)
+  const server = await appContainer.getAsync<IServer>(TYPES.Services.Server)
   const log = appContainer.get<Logger>(TYPES.Logger)
   // trigger construct
   await appContainer.getAsync<MetricServer>(TYPES.Services.MetricServer)

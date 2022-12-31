@@ -29,7 +29,7 @@ appContainer
   .bind<IServerFactory>(TYPES.Factories.ServerFactory)
   .to(ServerFactory)
 
-appContainer.bind<IWatchDog>(TYPES.Services.HealthMonitor).to(HealthMonitor)
+appContainer.bind<IWatchDog>(TYPES.Services.HealthMonitor).to(HealthMonitor).inSingletonScope()
 
 appContainer
   .bind<MetricServer>(TYPES.Services.MetricServer)
@@ -47,13 +47,13 @@ appContainer
 
 appContainer
   .bind<IServer>(TYPES.Services.Server)
-  .toDynamicValue((ctx: interfaces.Context) => {
+  .toDynamicValue(async (ctx: interfaces.Context) => {
     const factory = ctx.container.get<IServerFactory>(
       TYPES.Factories.ServerFactory
     )
     const config = ctx.container.get<IConfig>(TYPES.Configurations.Main)
     const logger = ctx.container.get<Logger>(TYPES.Logger)
-    const monitor = ctx.container.get<IWatchDog>(TYPES.Services.HealthMonitor)
+    const monitor = await ctx.container.getAsync<IWatchDog>(TYPES.Services.HealthMonitor)
     return factory.createServer(config, logger, monitor)
   })
 export { appContainer }
