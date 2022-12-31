@@ -29,7 +29,10 @@ appContainer
   .bind<IServerFactory>(TYPES.Factories.ServerFactory)
   .to(ServerFactory)
 
-appContainer.bind<IWatchDog>(TYPES.Services.HealthMonitor).to(HealthMonitor).inSingletonScope()
+appContainer
+  .bind<IWatchDog>(TYPES.Services.HealthMonitor)
+  .to(HealthMonitor)
+  .inSingletonScope()
 
 appContainer
   .bind<MetricServer>(TYPES.Services.MetricServer)
@@ -53,7 +56,9 @@ appContainer
     )
     const config = ctx.container.get<IConfig>(TYPES.Configurations.Main)
     const logger = ctx.container.get<Logger>(TYPES.Logger)
-    const monitor = await ctx.container.getAsync<IWatchDog>(TYPES.Services.HealthMonitor)
+    const monitor = await ctx.container.getAsync<IWatchDog>(
+      TYPES.Services.HealthMonitor
+    )
     return factory.createServer(config, logger, monitor)
   })
 export { appContainer }
