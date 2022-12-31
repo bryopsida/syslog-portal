@@ -2,6 +2,7 @@ const TYPES = {
   Services: {
     Server: Symbol.for('Server'),
     MetricServer: Symbol.for('MetricServer'),
+    HealthMonitor: Symbol.for('HealthMonitor'),
   },
   Logger: Symbol.for('Logger'),
   Factories: {

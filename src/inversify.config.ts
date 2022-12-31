@@ -8,6 +8,8 @@ import { ILoggerFactory, LoggerFactory } from './logger/logger'
 import { IServerFactory, ServerFactory } from './factories/serverFactory'
 import { IServer } from './interfaces/server'
 import { MetricServer } from './services/metricServer'
+import { IWatchDog } from './interfaces/watchDog'
+import { HealthMonitor } from './services/healthMonitor'
 
 const appContainer = new Container()
 
@@ -26,6 +28,8 @@ appContainer
 appContainer
   .bind<IServerFactory>(TYPES.Factories.ServerFactory)
   .to(ServerFactory)
+
+appContainer.bind<IWatchDog>(TYPES.Services.HealthMonitor).to(HealthMonitor)
 
 appContainer
   .bind<MetricServer>(TYPES.Services.MetricServer)
@@ -49,6 +53,7 @@ appContainer
     )
     const config = ctx.container.get<IConfig>(TYPES.Configurations.Main)
     const logger = ctx.container.get<Logger>(TYPES.Logger)
-    return factory.createServer(config, logger)
+    const monitor = ctx.container.get<IWatchDog>(TYPES.Services.HealthMonitor)
+    return factory.createServer(config, logger, monitor)
   })
 export { appContainer }

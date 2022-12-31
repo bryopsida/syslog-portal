@@ -1,7 +1,9 @@
+import 'reflect-metadata'
 import { describe, it, expect } from '@jest/globals'
 import pino from 'pino'
 import { UDPServer } from '../../src/services/udpServer'
 import { ServerTypeEnum } from '../../src/models/config'
+import { HealthMonitor } from '../../src/services/healthMonitor'
 
 describe('UDPServer', () => {
   it('should emit messages when received', async () => {
@@ -34,12 +36,14 @@ describe('UDPServer', () => {
     })
     const log = pino(transport)
     const logger = pino()
+    const monitor = new HealthMonitor(logger)
     const server = new UDPServer(
       {
         serverPort: 8001,
         serverType: ServerTypeEnum.UDP,
       },
-      logger
+      logger,
+      monitor
     )
     await server.startListening()
     const state = {
