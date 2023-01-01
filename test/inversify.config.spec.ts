@@ -17,4 +17,10 @@ describe('inversify.config', () => {
   it('binds metric server service', () => {
     expect(appContainer.isBound(TYPES.Services.MetricServer)).toBeTruthy()
   })
+  it('binds archiver when enabled', () => {
+    expect(false).toBeTruthy()
+  })
+  it('does not bind archiver when disabled', () => {
+    expect(false).toBeTruthy()
+  })
 })

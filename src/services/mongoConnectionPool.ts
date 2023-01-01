@@ -1,6 +1,6 @@
 import { MongoClient, MongoClientOptions } from 'mongodb'
 import { IConnPool } from '../interfaces/connPool'
-import { inject, injectable } from 'inversify'
+import { inject, injectable, preDestroy } from 'inversify'
 import genericPool from 'generic-pool'
 import { TYPES } from '../types'
 import { IConfig } from '../models/config'
@@ -64,5 +64,11 @@ export class MongoConnPool implements IConnPool<MongoClient> {
 
   release(conn: MongoClient): Promise<void> {
     return this.pool.release(conn)
+  }
+
+  @preDestroy()
+  async clearAll(): Promise<void> {
+    await this.pool.drain()
+    await this.pool.clear()
   }
 }
