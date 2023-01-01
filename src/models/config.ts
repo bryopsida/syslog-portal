@@ -1,3 +1,5 @@
+import { MongoClientOptions } from 'mongodb'
+
 export enum ServerTypeEnum {
   // eslint-disable-next-line no-unused-vars
   UDP = 'UDP',
@@ -15,6 +17,13 @@ export enum ArchiverType {
 }
 export interface IArchiverconfig extends ISubComponentConfig {
   type: ArchiverType
+  options?: MongoClientOptions
+  hostname?: string
+  port?: number
+  username?: string
+  password?: string
+  usernameFile?: string
+  passwordFile?: string
 }
 export interface IConfig {
   serverType: ServerTypeEnum
