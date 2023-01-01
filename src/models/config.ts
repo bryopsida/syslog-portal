@@ -4,7 +4,20 @@ export enum ServerTypeEnum {
   // eslint-disable-next-line no-unused-vars
   TCP = 'TCP',
 }
+export interface ISubComponentConfig {
+  enabled: boolean
+}
+export enum ArchiverType {
+  // eslint-disable-next-line no-unused-vars
+  MONGO = 0,
+  // eslint-disable-next-line no-unused-vars
+  SQLLITE3 = 1,
+}
+export interface IArchiverconfig extends ISubComponentConfig {
+  type: ArchiverType
+}
 export interface IConfig {
   serverType: ServerTypeEnum
   serverPort: number
+  archiver: IArchiverconfig
 }
