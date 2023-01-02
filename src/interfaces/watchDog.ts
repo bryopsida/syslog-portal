@@ -1,3 +1,7 @@
+/**
+ * A watchdog that monitors checks and can determine
+ * if the service is in a degraded state
+ */
 export interface IWatchDog {
   /**
    * Register an entity with the watchdog

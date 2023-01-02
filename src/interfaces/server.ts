@@ -1,15 +1,45 @@
 import EventEmitter from 'events'
 import { FACILITY, SEVERITY } from '../models/rfc5424'
 
+/**
+ * Log message shape
+ */
 export interface ILogMessage {
+  /**
+   * Time message was recorded on originating server
+   */
   timestamp?: Date
+  /**
+   * Severity of the log message
+   */
   severity: SEVERITY
+  /**
+   * Which system facility produced the log message
+   */
   facility: FACILITY
+  /**
+   * The log message itself
+   */
   message: string
+  /**
+   * Name of the app producing the message
+   */
   app?: string
+  /**
+   * Process id of the app message
+   */
   procId?: number
+  /**
+   * Unique message id of the message
+   */
   msgId?: string
+  /**
+   * hostname of the server that produced the log message
+   */
   hostname?: string
+  /**
+   * Version of this model
+   */
   modelVersion: number
 }
 export interface ILogMessageListener {
@@ -20,6 +50,9 @@ export interface ILogMessageListener {
    */
   onLogMessage(message: ILogMessage): Promise<any>
 }
+/**
+ * A server for receiving syslog messages
+ */
 export interface IServer extends EventEmitter {
   /**
    * @returns {Promise<void>} start listening for syslog messages, this includes allocating and binding any server ports

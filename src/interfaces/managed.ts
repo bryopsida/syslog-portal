@@ -1,3 +1,6 @@
+/**
+ * A resource that needs to be started, and stopped
+ */
 export interface IManagedResource {
   /**
    * Starts the managed resources, creating any timers, binding any sockets to be ready to serve connections
