@@ -6,6 +6,8 @@
   "scripts": {
     "start": "node dist/app.js",
     "start:dev": "NODE_CONFIG_DIR=./src/config NODE_ENV=dev nodemon",
+    "start:services": "docker-compose up -d",
+    "stop:services": "docker-compose down",
     "build": "node_modules/typescript/bin/tsc --project ./ && mkdir -p dist/config && cp src/config/*.json dist/config/",
     "build:docs": "typedoc src/**/*.ts --exclude node_modules/@types/node/events.d.ts ",
     "build:image": "docker build . -t ghcr.io/bryopsida/syslog-portal:local",

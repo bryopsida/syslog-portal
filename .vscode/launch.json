@@ -1,0 +1,41 @@
+{
+  // Use IntelliSense to learn about possible attributes.
+  // Hover to view descriptions of existing attributes.
+  // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "type": "node",
+      "request": "launch",
+      "name": "Launch Syslog Portal",
+      "skipFiles": ["<node_internals>/**"],
+      "env": {
+        "SYSLOG_PORTAL_ARCHIVER_ENABLED": "true"
+      },
+      "console": "integratedTerminal",
+      "preLaunchTask": ["start_services", "build"],
+      "postDebugTask": ["stop_services"],
+      "program": "${workspaceFolder}/dist/src/app.js",
+      "outFiles": ["${workspaceFolder}/**/*.js"]
+    },
+    {
+      "type": "node",
+      "name": "Launch Nodemon Syslog Portal",
+      "preLaunchTask": "start_services",
+      "postDebugTask": "stop_services",
+      "console": "integratedTerminal",
+      "cwd": "${workspaceRoot}",
+      "runtimeExecutable": "npm",
+      "runtimeArgs": ["run-script", "start:dev"],
+      "env": {
+        "SYSLOG_PORTAL_ARCHIVER_ENABLED": "true",
+        "SYSLOG_PORTAL_ARCHIVER_TYPE": "MONGO",
+        "SYSLOG_PORTAL_ARCHIVER_HOSTNAME": "127.0.0.1",
+        "SYSLOG_PORTAL_ARCHIVER_PORT": "27017",
+        "SYSLOG_PORTAL_ARCHIVER_USERNAME": "root",
+        "SYSLOG_PORTAL_ARCHIVER_PASSWORD": "root",
+        "SYSLOG_PORTAL_LOGGER_LEVEL": "debug"
+      }
+    }
+  ]
+}

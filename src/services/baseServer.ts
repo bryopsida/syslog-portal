@@ -153,7 +153,14 @@ export abstract class BaseServer extends EventEmitter implements IServer {
     )
     for (const listener of this._listeners.values()) {
       this._log.trace('Emitting log message to listener')
-      await listener.onLogMessage(message)
+      await listener.onLogMessage(message).catch((err) => {
+        this._log.error(
+          err,
+          'Error occurred while emitting log message to listener: %s',
+          err.message
+        )
+        throw err
+      })
       this._log.trace('Finished emitting log message to listener')
     }
     this._log.debug('Finished Emitting log message event')
