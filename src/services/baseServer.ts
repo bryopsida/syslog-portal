@@ -147,8 +147,11 @@ export abstract class BaseServer extends EventEmitter implements IServer {
   }
 
   protected async emitLogMessage(message: ILogMessage): Promise<void> {
-    this._log.debug('Emitting log message event')
-    for (const listener of this._listeners) {
+    this._log.debug(
+      'Emitting log message event to (%s) listeners',
+      this._listeners.size
+    )
+    for (const listener of this._listeners.values()) {
       this._log.trace('Emitting log message to listener')
       await listener.onLogMessage(message)
       this._log.trace('Finished emitting log message to listener')
@@ -159,11 +162,13 @@ export abstract class BaseServer extends EventEmitter implements IServer {
   public onLogMessage(listener: ILogMessageListener): void {
     this._log.info('Adding log message listener')
     this._listeners.add(listener)
+    this._log.info('Listeners: %s', this._listeners.size)
   }
 
   public offLogMessage(listener: ILogMessageListener): void {
     this._log.info('Removing log message listener')
     this._listeners.delete(listener)
+    this._log.info('Listeners: %s', this._listeners.size)
   }
 
   protected pingMonitor(): void {
