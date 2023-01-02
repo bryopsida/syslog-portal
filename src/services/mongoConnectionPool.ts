@@ -38,7 +38,7 @@ export class MongoConnPool implements IConnPool<MongoClient> {
   async getUsername(): Promise<string | undefined> {
     if (this.config.archiver.usernameFile == null)
       return Promise.resolve(this.config.archiver.username)
-    return await readFile(resolve(this.config.archiver.usernameFile), {
+    return readFile(resolve(this.config.archiver.usernameFile), {
       encoding: 'utf8',
     })
   }
@@ -46,7 +46,7 @@ export class MongoConnPool implements IConnPool<MongoClient> {
   async getPassword(): Promise<string | undefined> {
     if (this.config.archiver.passwordFile == null)
       return Promise.resolve(this.config.archiver.password)
-    return await readFile(resolve(this.config.archiver.passwordFile), {
+    return readFile(resolve(this.config.archiver.passwordFile), {
       encoding: 'utf8',
     })
   }
@@ -63,6 +63,7 @@ export class MongoConnPool implements IConnPool<MongoClient> {
 
   async create(): Promise<MongoClient> {
     const url = this.getUrl()
+    this.log.info('Fetching mongodb options')
     const options = await this.getOptions()
     this.log.info('Allocating new mongodb connection to %s', url)
     return new MongoClient(url, options).connect().catch((err) => {
