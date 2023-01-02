@@ -1,15 +1,17 @@
 {
-  "serverType": "SYSLOG_PORTAL_SERVER_TYPE",
-  "serverPort": "SYSLOG_PORTAL_SERVER_PORT",
-  "archiver": {
-    "enabled": "SYSLOG_PORTAL_ARCHIVER_ENABLED",
-    "type": "SYSLOG_PORTAL_ARCHIVER_TYPE",
-    "hostname": "SYSLOG_PORTAL_ARCHIVER_HOSTNAME",
-    "authMechanism": "SYSLOG_PORTAL_ARCHIVER_AUTH_MECHANISM",
-    "usernameFile": "SYSLOG_PORTAL_ARCHIVER_USERNAME_FILE",
-    "passwordFile": "SYSLOG_PORTAL_ARCHIVER_PASSWORD_FILE",
-    "username": "SYSLOG_PORTAL_ARCHIVER_USERNAME",
-    "password": "SYSLOG_PORTAL_ARCHIVER_PASSWORD"
+  "server": {
+    "serverType": "SYSLOG_PORTAL_SERVER_TYPE",
+    "serverPort": "SYSLOG_PORTAL_SERVER_PORT",
+    "archiver": {
+      "enabled": "SYSLOG_PORTAL_ARCHIVER_ENABLED",
+      "type": "SYSLOG_PORTAL_ARCHIVER_TYPE",
+      "hostname": "SYSLOG_PORTAL_ARCHIVER_HOSTNAME",
+      "authMechanism": "SYSLOG_PORTAL_ARCHIVER_AUTH_MECHANISM",
+      "usernameFile": "SYSLOG_PORTAL_ARCHIVER_USERNAME_FILE",
+      "passwordFile": "SYSLOG_PORTAL_ARCHIVER_PASSWORD_FILE",
+      "username": "SYSLOG_PORTAL_ARCHIVER_USERNAME",
+      "password": "SYSLOG_PORTAL_ARCHIVER_PASSWORD"
+    }
   },
   "logger": {
     "level": "SYSLOG_PORTAL_LOGGER_LEVEL"
