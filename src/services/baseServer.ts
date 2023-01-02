@@ -147,16 +147,22 @@ export abstract class BaseServer extends EventEmitter implements IServer {
   }
 
   protected async emitLogMessage(message: ILogMessage): Promise<void> {
+    this._log.debug('Emitting log message event')
     for (const listener of this._listeners) {
+      this._log.trace('Emitting log message to listener')
       await listener.onLogMessage(message)
+      this._log.trace('Finished emitting log message to listener')
     }
+    this._log.debug('Finished Emitting log message event')
   }
 
   public onLogMessage(listener: ILogMessageListener): void {
+    this._log.info('Adding log message listener')
     this._listeners.add(listener)
   }
 
   public offLogMessage(listener: ILogMessageListener): void {
+    this._log.info('Removing log message listener')
     this._listeners.delete(listener)
   }
 
