@@ -62,9 +62,9 @@ export class MongoConnPool implements IConnPool<MongoClient> {
   }
 
   async create(): Promise<MongoClient> {
-    this.log.info('Allocating new mongodb connection')
     const url = this.getUrl()
     const options = await this.getOptions()
+    this.log.info('Allocating new mongodb connection to %s', url)
     return new MongoClient(url, options).connect().catch((err) => {
       this.log.error(
         err,
