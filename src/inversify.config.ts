@@ -29,10 +29,12 @@ appContainer
 appContainer
   .bind<ILoggerFactory>(TYPES.Factories.LoggerFactory)
   .to(LoggerFactory)
+  .inSingletonScope()
 
 appContainer
   .bind<IServerFactory>(TYPES.Factories.ServerFactory)
   .to(ServerFactory)
+  .inSingletonScope()
 
 appContainer
   .bind<IWatchDog>(TYPES.Services.HealthMonitor)
@@ -80,4 +82,5 @@ appContainer
     )
     return factory.createServer(config, logger, monitor)
   })
+  .inSingletonScope()
 export { appContainer }
