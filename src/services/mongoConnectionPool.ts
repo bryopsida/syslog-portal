@@ -18,6 +18,7 @@ export class MongoConnPool implements IConnPool<MongoClient> {
     @inject(TYPES.Configurations.Main) config: IConfig,
     @inject(TYPES.Logger) log: Logger
   ) {
+    log.info('Creating mongo connection pool')
     this.pool = genericPool.createPool<MongoClient>(this, {
       min: 0,
       max: 10,

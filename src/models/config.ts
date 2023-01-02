@@ -20,9 +20,9 @@ export interface ISubComponentConfig {
  */
 export enum ArchiverType {
   // eslint-disable-next-line no-unused-vars
-  MONGO = 0,
+  MONGO = 'MONGO',
   // eslint-disable-next-line no-unused-vars
-  SQLLITE3 = 1,
+  SQLLITE3 = 'SQLLITE3',
 }
 /**
  * Archiver configuration

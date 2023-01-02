@@ -16,6 +16,7 @@ export class MongoArchiver implements ILogMessageListener {
     @inject(TYPES.Logger) log: Logger,
     @inject(TYPES.Services.MongoConnPool) pool: IConnPool<MongoClient>
   ) {
+    log.info('Creating mongo archiver')
     this.server = server
     this.log = log
     this.pool = pool
