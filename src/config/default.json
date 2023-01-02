@@ -4,13 +4,7 @@
     "serverPort": 1514,
     "archiver": {
       "enabled": true,
-      "type": "MONGO",
-      "hostname": "",
-      "authMechanism": "",
-      "usernameFile": "",
-      "passwordFile": "",
-      "username": "",
-      "password": ""
+      "type": "MONGO"
     },
     "broadcaster": {
       "enabled": true,
