@@ -6,6 +6,7 @@ import { TYPES } from '../src/types'
 import { LoggerFactory } from '../src/logger/logger'
 import { Logger } from 'pino'
 import { MetricServer } from '../src/services/metricServer'
+import { ArchiverType, IConfig } from '../src/models/config'
 
 export interface IMain {
   (container: Container): Promise<void>
@@ -23,6 +24,12 @@ describe('app', () => {
       },
     } as any)
     container.bind<IServer>(TYPES.Services.Server).toConstantValue(mockedServer)
+    container.bind<IConfig>(TYPES.Configurations.Main).toConstantValue({
+      archiver: {
+        enabled: false,
+        type: ArchiverType.MONGO,
+      },
+    } as any)
     container
       .bind<MetricServer>(TYPES.Services.MetricServer)
       .toConstantValue({} as any)
