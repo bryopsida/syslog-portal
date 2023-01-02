@@ -38,7 +38,7 @@ export class MongoConnPool implements IConnPool<MongoClient> {
   async getUsername(): Promise<string | undefined> {
     if (this.config.archiver?.usernameFile == null)
       return Promise.resolve(this.config.archiver.username)
-    this.log.info(
+    this.log.trace(
       'Reading username from file %s',
       this.config.archiver.usernameFile
     )
@@ -50,7 +50,7 @@ export class MongoConnPool implements IConnPool<MongoClient> {
   async getPassword(): Promise<string | undefined> {
     if (this.config.archiver?.passwordFile == null)
       return Promise.resolve(this.config.archiver.password)
-    this.log.info(
+    this.log.trace(
       'Reading password from file %s',
       this.config.archiver.passwordFile
     )
@@ -73,7 +73,7 @@ export class MongoConnPool implements IConnPool<MongoClient> {
     const url = this.getUrl()
     this.log.trace('Fetching mongodb options')
     const options = await this.getOptions()
-    this.log.info('Allocating new mongodb connection to %s', url)
+    this.log.debug('Allocating new mongodb connection to %s', url)
     return new MongoClient(url, options).connect().catch((err) => {
       this.log.error(
         err,
