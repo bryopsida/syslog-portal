@@ -2,7 +2,7 @@ import 'reflect-metadata'
 import { describe, it, expect } from '@jest/globals'
 import pino from 'pino'
 import { TCPServer } from '../../src/services/tcpServer'
-import { ServerTypeEnum } from '../../src/models/config'
+import { ArchiverType, ServerTypeEnum } from '../../src/models/config'
 import { HealthMonitor } from '../../src/services/healthMonitor'
 
 describe('TCPServer', () => {
@@ -41,6 +41,10 @@ describe('TCPServer', () => {
       {
         serverPort: 8100,
         serverType: ServerTypeEnum.TCP,
+        archiver: {
+          enabled: false,
+          type: ArchiverType.MONGO,
+        },
       },
       logger,
       monitor

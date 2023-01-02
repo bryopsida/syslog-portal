@@ -7,6 +7,9 @@ import { IWatchDog } from '../interfaces/watchDog'
 
 const NIL = '-'
 
+/**
+ * Base class for shared functionality between TCP and UDP Server
+ */
 export abstract class BaseServer extends EventEmitter implements IServer {
   protected readonly _port: number
   protected readonly _log: Logger

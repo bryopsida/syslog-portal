@@ -3,7 +3,7 @@
     "serverType": "UDP",
     "serverPort": 1514,
     "archiver": {
-      "enabled": true,
+      "enabled": false,
       "type": "MONGO"
     },
     "broadcaster": {

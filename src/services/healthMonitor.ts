@@ -32,7 +32,7 @@ export class HealthMonitor implements IWatchDog, IManagedResource {
   }
 
   /**
-   * @inheritdoc
+   * @inheritDoc
    */
   @postConstruct()
   start(): Promise<void> {
@@ -51,7 +51,7 @@ export class HealthMonitor implements IWatchDog, IManagedResource {
   }
 
   /**
-   * @inheritdoc
+   * @inheritDoc
    */
   @preDestroy()
   async stop(): Promise<void> {
@@ -69,7 +69,7 @@ export class HealthMonitor implements IWatchDog, IManagedResource {
 
   /**
    *
-   * @inheritdoc
+   * @inheritDoc
    */
   register(
     entityId: string,
@@ -81,7 +81,7 @@ export class HealthMonitor implements IWatchDog, IManagedResource {
   }
 
   /**
-   * @inheritdoc
+   * @inheritDoc
    */
   unregister(entityId: string): void {
     this._entities.delete(entityId)
@@ -90,7 +90,7 @@ export class HealthMonitor implements IWatchDog, IManagedResource {
   }
 
   /**
-   * @inheritdoc
+   * @inheritDoc
    */
   kick(entityId: string): void {
     this._entityCheckIn.set(entityId, Date.now())

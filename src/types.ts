@@ -3,6 +3,10 @@ const TYPES = {
     Server: Symbol.for('Server'),
     MetricServer: Symbol.for('MetricServer'),
     HealthMonitor: Symbol.for('HealthMonitor'),
+    MongoConnPool: Symbol.for('MongoConnPool'),
+  },
+  Listeners: {
+    MongoArchiver: Symbol.for('MongoArchiver'),
   },
   Logger: Symbol.for('Logger'),
   Factories: {

@@ -1,14 +1,24 @@
 import { Container } from 'inversify'
 import { TYPES } from './types'
 import { Logger } from 'pino'
-import { IServer } from './interfaces/server'
+import { IServer, ILogMessageListener } from './interfaces/server'
 import { MetricServer } from './services/metricServer'
+import { ArchiverType, IConfig } from './models/config'
 
 export default async function main(appContainer: Container): Promise<void> {
   const server = await appContainer.getAsync<IServer>(TYPES.Services.Server)
   const log = appContainer.get<Logger>(TYPES.Logger)
   // trigger construct
   await appContainer.getAsync<MetricServer>(TYPES.Services.MetricServer)
+
+  const config = appContainer.get<IConfig>(TYPES.Configurations.Main)
+  if (config.archiver.enabled) {
+    if (config.archiver.type === ArchiverType.MONGO) {
+      await appContainer.getAsync<ILogMessageListener>(
+        TYPES.Listeners.MongoArchiver
+      )
+    }
+  }
   log.info('Starting to listen for connections')
   await server.startListening()
   log.info('Now serving connections')

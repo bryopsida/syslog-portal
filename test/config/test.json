@@ -3,7 +3,7 @@
     "serverType": "TCP",
     "serverPort": 1000,
     "archiver": {
-      "enabled": true,
+      "enabled": false,
       "type": "MONGO"
     },
     "broadcaster": {

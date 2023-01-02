@@ -1,17 +1,22 @@
 import 'reflect-metadata'
 import { Container, interfaces } from 'inversify'
 import { TYPES } from './types'
-import { IConfig } from './models/config'
+import { ArchiverType, IConfig } from './models/config'
 import config from 'config'
 import { Logger, LoggerOptions } from 'pino'
 import { ILoggerFactory, LoggerFactory } from './logger/logger'
 import { IServerFactory, ServerFactory } from './factories/serverFactory'
-import { IServer } from './interfaces/server'
+import { ILogMessageListener, IServer } from './interfaces/server'
 import { MetricServer } from './services/metricServer'
 import { IWatchDog } from './interfaces/watchDog'
 import { HealthMonitor } from './services/healthMonitor'
+import { MongoArchiver } from './services/mongoArchiver'
+import { IConnPool } from './interfaces/connPool'
+import { MongoClient } from 'mongodb'
+import { MongoConnPool } from './services/mongoConnectionPool'
 
 const appContainer = new Container()
+const appConfig = config.get<IConfig>('server')
 
 appContainer
   .bind<IConfig>(TYPES.Configurations.Main)
@@ -47,6 +52,20 @@ appContainer
     )
     return factory.createLogger()
   })
+
+if (appConfig.archiver.enabled) {
+  if (appConfig.archiver.type === ArchiverType.MONGO) {
+    appContainer
+      .bind<IConnPool<MongoClient>>(TYPES.Services.MongoConnPool)
+      .to(MongoConnPool)
+      .inSingletonScope()
+
+    appContainer
+      .bind<ILogMessageListener>(TYPES.Listeners.MongoArchiver)
+      .to(MongoArchiver)
+      .inSingletonScope()
+  }
+}
 
 appContainer
   .bind<IServer>(TYPES.Services.Server)
