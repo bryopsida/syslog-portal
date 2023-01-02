@@ -24,11 +24,13 @@ export class MongoArchiver implements ILogMessageListener {
 
   @postConstruct()
   setup() {
+    this.log.info('Registering archiver listener with server')
     this.server.onLogMessage(this)
   }
 
   @preDestroy()
   cleanUp() {
+    this.log.info('Deregistering archiver listener from server')
     this.server.offLogMessage(this)
   }
 
