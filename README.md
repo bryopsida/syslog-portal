@@ -6,6 +6,14 @@
 
 This creates a server capable of receiving and parsing syslog messages in RFC 5424 format. The structured data component of RFC 5424 is not yet supported. It can create either a UDP or TCP server, the UDP server is more actively tested. Once launched you can either adjust the log level to output the information to standard IO for another log aggregation system to pick up or save the log messages to `syslog.messages` in mongodb. It can handle thousands of requests per minute with minimal resources: `128mi` and `256m`. This is provided as a container and a [helm chart](https://github.com/bryopsida/helm/tree/main/charts/syslog-portal), running directly is not supported as to avoid being stuck supporting old versions of node but it is tested against 16 and 18.
 
+## Intended Scope
+
+This is not intended to provide more functionality than parsing syslog messages and archiving them into a data store, and/or publishing the parsed message into a message bus (kafka). Adding additional archivers and broadcasters (message busses) is in scope of this repo, doing any additional parsing of the inner log messages is not. That is intended to be done via other ETL setups or services that act on the broadcasted messages as desired by end users.
+
+## Why make this?
+
+Why make this when system X,Y, or Z can do this? I wanted a minimal but reliable syslog receiver that would be easy for me to configure, runs well on small systems such as a raspberry pi, (both linux/amd64 and linux/arm64 support) and didn't require bringing in a bunch of other systems to use.
+
 ## NPM Scripts
 
 - `lint`lints the source code using eslint
@@ -15,7 +23,9 @@ This creates a server capable of receiving and parsing syslog messages in RFC 54
 - `build:docs` generates the documentation pages from the code comments
 - `build:image` build the container image from the Dockerfile
 - `start` runs the compiled js in `dist`
+- `start:services` spins up mongodb in a docker-compose stack for testing
 - `start:dev` runs using nodemon and will automatically rebuild and launch whenever a change is made under the source folder
+- `stop:services` spins down the test services
 
 ## How to launch
 
