@@ -62,6 +62,6 @@ docker run -p 1514:1514 --env "SYSLOG_PORTAL_LOGGER_LEVEL=trace" ghcr.io/bryopsi
 
 and send your syslog messages to `<your host>:1514`
 
-
 ## Something isn't working right?
+
 If you come across an issue feel free to report it as an issue, I'll address it when I have time available, pull requests are also welcome.
