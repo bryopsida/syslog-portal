@@ -28,10 +28,10 @@ export abstract class BaseServer extends EventEmitter implements IServer {
   abstract close(): Promise<void>
 
   protected parseMessage(data: Buffer, remoteInfo: any): void {
+    // Supports RFC 3164 and RFC 5424
+    // data is ASCII
+    const textData = data.toString('ascii')
     try {
-      // Supports RFC 3164 and RFC 5424
-      // data is ASCII
-      const textData = data.toString('ascii')
       const parserState = {
         position: 0,
       }
@@ -72,7 +72,12 @@ export abstract class BaseServer extends EventEmitter implements IServer {
         )
       })
     } catch (err: any) {
-      this._log.error(`Encountered error while parsing message: ${err.message}`)
+      this._log.error(
+        err,
+        'Encountered error while parsing message: %s, incoming message: %s',
+        err.message,
+        textData
+      )
     }
   }
 
