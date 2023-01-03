@@ -27,5 +27,7 @@ WORKDIR /usr/src/app
 COPY --chown=node:node --from=libraries /usr/src/app/node_modules /usr/src/app/node_modules
 
 COPY --chown=node:node --from=build /usr/src/app/dist/ /usr/src/app/
-EXPOSE 3000
+EXPOSE 1514
+EXPOSE 8080
+EXPOSE 9091
 CMD ["dumb-init", "node", "app.js"]

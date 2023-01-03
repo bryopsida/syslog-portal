@@ -20,7 +20,7 @@ const transport = pino.transport({
       target: 'pino-socket',
       options: {
         mode: 'udp',
-        address: '127.0.0.1',
+        address: 'localhost',
         port: 1514,
       },
     },
