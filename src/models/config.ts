@@ -24,7 +24,7 @@ export enum ArchiverType {
   // eslint-disable-next-line no-unused-vars
   SQLLITE3 = 'SQLLITE3',
   // eslint-disable-next-line no-unused-vars
-  POUCHDB = 'POUCHDB'
+  POUCHDB = 'POUCHDB',
 }
 /**
  * Archiver configuration
