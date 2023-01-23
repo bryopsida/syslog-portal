@@ -7,6 +7,7 @@ const TYPES = {
   },
   Listeners: {
     MongoArchiver: Symbol.for('MongoArchiver'),
+    PouchArchiver: Symbol.for('PouchArchiver'),
   },
   Logger: Symbol.for('Logger'),
   Factories: {

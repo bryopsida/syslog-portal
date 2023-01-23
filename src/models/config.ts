@@ -23,6 +23,8 @@ export enum ArchiverType {
   MONGO = 'MONGO',
   // eslint-disable-next-line no-unused-vars
   SQLLITE3 = 'SQLLITE3',
+  // eslint-disable-next-line no-unused-vars
+  POUCHDB = 'POUCHDB'
 }
 /**
  * Archiver configuration
