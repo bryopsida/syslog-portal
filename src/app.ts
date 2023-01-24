@@ -17,6 +17,10 @@ export default async function main(appContainer: Container): Promise<void> {
       await appContainer.getAsync<ILogMessageListener>(
         TYPES.Listeners.MongoArchiver
       )
+    } else if (config.archiver.type === ArchiverType.POUCHDB) {
+      await appContainer.getAsync<ILogMessageListener>(
+        TYPES.Listeners.PouchArchiver
+      )
     }
   }
   log.info('Starting to listen for connections')

@@ -14,6 +14,7 @@ import { MongoArchiver } from './services/mongoArchiver'
 import { IConnPool } from './interfaces/connPool'
 import { MongoClient } from 'mongodb'
 import { MongoConnPool } from './services/mongoConnectionPool'
+import { PouchArchiver } from './services/pouchArchiver'
 
 const appContainer = new Container()
 const appConfig = config.get<IConfig>('server')
@@ -65,6 +66,11 @@ if (appConfig.archiver.enabled) {
     appContainer
       .bind<ILogMessageListener>(TYPES.Listeners.MongoArchiver)
       .to(MongoArchiver)
+      .inSingletonScope()
+  } else if (appConfig.archiver.type === ArchiverType.POUCHDB) {
+    appContainer
+      .bind<ILogMessageListener>(TYPES.Listeners.PouchArchiver)
+      .to(PouchArchiver)
       .inSingletonScope()
   }
 }

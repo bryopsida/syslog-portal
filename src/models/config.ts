@@ -62,6 +62,14 @@ export interface IArchiverconfig extends ISubComponentConfig {
    * Path to a file containing the password for authentication
    */
   passwordFile?: string
+  /**
+   * Interval in milliseconds between syncs of local archival copy to a remote store
+   */
+  syncInterval?: number
+  /**
+   * Database folder
+   */
+  databaseFolder?: string
 }
 /**
  * System configuration

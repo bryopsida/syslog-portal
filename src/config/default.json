@@ -3,8 +3,14 @@
     "serverType": "UDP",
     "serverPort": 1514,
     "archiver": {
-      "enabled": false,
-      "type": "MONGO"
+      "enabled": true,
+      "type": "POUCHDB",
+      "syncInterval": 300000,
+      "hostname": "localhost",
+      "port": 5984,
+      "username": "admin",
+      "password": "admin",
+      "databaseFolder": "./data/"
     },
     "broadcaster": {
       "enabled": true,
