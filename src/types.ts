@@ -14,6 +14,9 @@ const TYPES = {
     LoggerFactory: Symbol.for('LoggerFactory'),
     ServerFactory: Symbol.for('ServerFactory'),
   },
+  Connections: {
+    Database: Symbol.for('Database'),
+  },
   Configurations: {
     Main: Symbol.for('Config'),
     Logger: Symbol.for('LoggerOptions'),

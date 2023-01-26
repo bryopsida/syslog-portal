@@ -70,6 +70,10 @@ export interface IArchiverconfig extends ISubComponentConfig {
    * Database folder
    */
   databaseFolder?: string
+  /**
+   * Protocol
+   */
+  proto?: string
 }
 /**
  * System configuration

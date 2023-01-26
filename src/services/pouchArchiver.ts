@@ -5,7 +5,7 @@ import { Logger } from 'pino'
 import PouchDB from 'pouchdb'
 import { randomUUID } from 'crypto'
 import { IConfig } from '../models/config'
-import { mkdirSync, readFileSync } from 'fs'
+import { mkdirSync } from 'fs'
 import { rmdir } from 'fs/promises'
 import { resolve, join } from 'node:path'
 
@@ -17,37 +17,32 @@ export class PouchArchiver implements ILogMessageListener {
   private remoteDatabase: PouchDB.Database
   private readonly syncInterval: ReturnType<typeof setInterval>
   private readonly dataFolder: string
-  private activeLocalDataFolder: string|undefined
+  private activeLocalDataFolder: string | undefined
 
   constructor(
     @inject(TYPES.Services.Server) server: IServer,
     @inject(TYPES.Configurations.Main) config: IConfig,
-    @inject(TYPES.Logger) log: Logger
+    @inject(TYPES.Logger) log: Logger,
+    @inject(TYPES.Connections.Database) db: PouchDB.Database
   ) {
     log.info('Creating pouchdb archiver')
     this.server = server
     this.log = log
     this.dataFolder = config.archiver.databaseFolder as string
     this.localDatabase = this.createDatabase()
-    this.remoteDatabase = new PouchDB(`http://${config.archiver.hostname}:${config.archiver.port}/syslog`, {
-      auth: {
-        username: config.archiver.usernameFile != null ? readFileSync(config.archiver.usernameFile, {
-          encoding: 'utf8'
-        }) : config.archiver.username,
-        password: config.archiver.passwordFile != null ? readFileSync(config.archiver.passwordFile, {
-          encoding: 'utf8'
-        }) : config.archiver.password
-      }
-    })
-    this.syncInterval = setInterval(this.sync.bind(this), config.archiver.syncInterval) // 5 minute sync
+    this.remoteDatabase = db
+    this.syncInterval = setInterval(
+      this.sync.bind(this),
+      config.archiver.syncInterval
+    ) // 5 minute sync
   }
-  
+
   createDatabase(): PouchDB.Database {
     const folder = join(resolve(this.dataFolder), randomUUID())
     this.activeLocalDataFolder = folder
     const db = join(folder, 'syslog')
     mkdirSync(db, {
-      recursive: true
+      recursive: true,
     })
     return new PouchDB(db)
   }
@@ -63,7 +58,10 @@ export class PouchArchiver implements ILogMessageListener {
       await oldDatabase.replicate.to(this.remoteDatabase)
       this.log.info('finished syncing to remote')
     } catch (err) {
-      this.log.error(err, 'error while syncing to remote, syncing back to local copy')
+      this.log.error(
+        err,
+        'error while syncing to remote, syncing back to local copy'
+      )
       await oldDatabase.replicate.to(this.localDatabase)
     }
     this.log.info('destroying previous sync interval copy')

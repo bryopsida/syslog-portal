@@ -8,6 +8,7 @@
       "syncInterval": 300000,
       "hostname": "localhost",
       "port": 5984,
+      "proto": "http",
       "username": "admin",
       "password": "admin",
       "databaseFolder": "./data/"
