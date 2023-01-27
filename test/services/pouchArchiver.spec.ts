@@ -7,12 +7,12 @@ import { PouchArchiver } from '../../src/services/pouchArchiver'
 import { ILogMessage, ILogMessageListener } from '../../src/interfaces/server'
 import { FACILITY, SEVERITY } from '../../src/models/rfc5424'
 import PouchDB from 'pouchdb'
-import PouchDBFind from 'pouchdb-find'
 import { tmpdir } from 'os'
 
-describe('PouchArchiver', () => {
-  let couch: StartedTestContainer
 
+describe('PouchArchiver', () => {
+
+  let couch: StartedTestContainer
   beforeEach(async () => {
     couch = await new GenericContainer('couchdb')
       .withEnvironment({
@@ -29,8 +29,7 @@ describe('PouchArchiver', () => {
   })
   it('syncs to remote', async () => {
     let listener: ILogMessageListener | null = null
-    const DbFactory = PouchDB.plugin(PouchDBFind)
-    const db = new DbFactory(
+    const db = new PouchDB(
       `http://localhost:${couch.getMappedPort(5984)}/syslog`,
       {
         auth: {
@@ -73,21 +72,18 @@ describe('PouchArchiver', () => {
 
     // lets pull it out of mongo and verify its there
     try {
-      const result = await db.find({
-        selector: {
-          message: 'test',
-        },
-        fields: ['severity', 'facility', 'modelVersion', 'message'],
-      })
+      const result = await db.allDocs()
       expect(result).toBeDefined()
-      expect(result.docs.length).toBe(1)
-      const msg = result.docs[0] as any as ILogMessage
-      expect(msg).toBeDefined()
-      expect(msg?.severity).toEqual(SEVERITY.ALERT)
-      expect(msg?.facility).toEqual(FACILITY.KERNEL)
-      expect(msg?.message).toEqual('test')
-      expect(msg?.modelVersion).toEqual(0)
+      expect(result.total_rows).toBe(1)
+      const row = result.rows[0]
+      const doc = await db.get(row.id) as any as ILogMessage
+      expect(doc).toBeDefined()
+      expect(doc?.severity).toEqual(SEVERITY.ALERT)
+      expect(doc?.facility).toEqual(FACILITY.KERNEL)
+      expect(doc?.message).toEqual('test')
+      expect(doc?.modelVersion).toEqual(0)
     } finally {
+      await archiver.cleanUp()
       await db.close()
     }
   })
