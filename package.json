@@ -68,6 +68,7 @@
     "config": "^3.3.8",
     "generic-pool": "^3.9.0",
     "inversify": "^6.0.1",
+    "leveldown": "^6.1.1",
     "mongodb": "^4.13.0",
     "pino": "^8.8.0",
     "pouchdb": "^8.0.0",
