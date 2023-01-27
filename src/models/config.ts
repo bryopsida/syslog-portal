@@ -23,6 +23,8 @@ export enum ArchiverType {
   MONGO = 'MONGO',
   // eslint-disable-next-line no-unused-vars
   SQLLITE3 = 'SQLLITE3',
+  // eslint-disable-next-line no-unused-vars
+  POUCHDB = 'POUCHDB',
 }
 /**
  * Archiver configuration
@@ -60,6 +62,18 @@ export interface IArchiverconfig extends ISubComponentConfig {
    * Path to a file containing the password for authentication
    */
   passwordFile?: string
+  /**
+   * Interval in milliseconds between syncs of local archival copy to a remote store
+   */
+  syncInterval?: number
+  /**
+   * Database folder
+   */
+  databaseFolder?: string
+  /**
+   * Protocol
+   */
+  proto?: string
 }
 /**
  * System configuration

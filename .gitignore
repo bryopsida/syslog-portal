@@ -106,3 +106,4 @@ dist
 .dccache
 docs
 .DS_Store
+data

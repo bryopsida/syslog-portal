@@ -7,11 +7,15 @@ const TYPES = {
   },
   Listeners: {
     MongoArchiver: Symbol.for('MongoArchiver'),
+    PouchArchiver: Symbol.for('PouchArchiver'),
   },
   Logger: Symbol.for('Logger'),
   Factories: {
     LoggerFactory: Symbol.for('LoggerFactory'),
     ServerFactory: Symbol.for('ServerFactory'),
+  },
+  Connections: {
+    Database: Symbol.for('Database'),
   },
   Configurations: {
     Main: Symbol.for('Config'),

@@ -17,6 +17,10 @@ export default async function main(appContainer: Container): Promise<void> {
       await appContainer.getAsync<ILogMessageListener>(
         TYPES.Listeners.MongoArchiver
       )
+    } else if (config.archiver.type === ArchiverType.POUCHDB) {
+      await appContainer.getAsync<ILogMessageListener>(
+        TYPES.Listeners.PouchArchiver
+      )
     }
   }
   log.info('Starting to listen for connections')
@@ -27,7 +31,14 @@ export default async function main(appContainer: Container): Promise<void> {
 if (require.main === module) {
   const appContainer = require('./inversify.config').appContainer as Container
   const log = appContainer.get<Logger>(TYPES.Logger)
-  main(appContainer).catch((err) => {
-    log.error(err, `Error while launching: ${err.message}`)
-  })
+  main(appContainer)
+    .then(() => {
+      process.on('SIGINT|SIGTERM', async () => {
+        // trigger preDestroy hooks
+        await appContainer.unbindAllAsync()
+      })
+    })
+    .catch((err) => {
+      log.error(err, `Error while launching: ${err.message}`)
+    })
 }

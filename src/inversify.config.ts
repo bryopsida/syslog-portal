@@ -14,6 +14,9 @@ import { MongoArchiver } from './services/mongoArchiver'
 import { IConnPool } from './interfaces/connPool'
 import { MongoClient } from 'mongodb'
 import { MongoConnPool } from './services/mongoConnectionPool'
+import { PouchArchiver } from './services/pouchArchiver'
+import PouchDB from 'pouchdb'
+import { readFileSync } from 'fs'
 
 const appContainer = new Container()
 const appConfig = config.get<IConfig>('server')
@@ -65,6 +68,39 @@ if (appConfig.archiver.enabled) {
     appContainer
       .bind<ILogMessageListener>(TYPES.Listeners.MongoArchiver)
       .to(MongoArchiver)
+      .inSingletonScope()
+  } else if (appConfig.archiver.type === ArchiverType.POUCHDB) {
+    appContainer
+      .bind<PouchDB.Database>(TYPES.Connections.Database)
+      .toDynamicValue((ctx) => {
+        const config: IConfig = ctx.container.get<IConfig>(
+          TYPES.Configurations.Main
+        )
+        return new PouchDB(
+          `${config.archiver.proto}://${config.archiver.hostname}:${config.archiver.port}/syslog`,
+          {
+            auth: {
+              username:
+                config.archiver.usernameFile != null
+                  ? readFileSync(config.archiver.usernameFile, {
+                      encoding: 'utf8',
+                    })
+                  : config.archiver.username,
+              password:
+                config.archiver.passwordFile != null
+                  ? readFileSync(config.archiver.passwordFile, {
+                      encoding: 'utf8',
+                    })
+                  : config.archiver.password,
+            },
+          }
+        )
+      })
+      .inSingletonScope()
+
+    appContainer
+      .bind<ILogMessageListener>(TYPES.Listeners.PouchArchiver)
+      .to(PouchArchiver)
       .inSingletonScope()
   }
 }
