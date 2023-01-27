@@ -79,10 +79,12 @@ export class PouchArchiver implements ILogMessageListener {
   }
 
   @preDestroy()
-  cleanUp() {
+  async cleanUp() {
     this.log.info('Deregistering archiver listener from server')
     this.server.offLogMessage(this)
     clearInterval(this.syncInterval)
+    await this.sync()
+    await this.localDatabase.close()
   }
 
   async onLogMessage(message: ILogMessage): Promise<any> {
