@@ -9,9 +9,7 @@ import { FACILITY, SEVERITY } from '../../src/models/rfc5424'
 import PouchDB from 'pouchdb'
 import { tmpdir } from 'os'
 
-
 describe('PouchArchiver', () => {
-
   let couch: StartedTestContainer
   beforeEach(async () => {
     couch = await new GenericContainer('couchdb')
@@ -76,7 +74,7 @@ describe('PouchArchiver', () => {
       expect(result).toBeDefined()
       expect(result.total_rows).toBe(1)
       const row = result.rows[0]
-      const doc = await db.get(row.id) as any as ILogMessage
+      const doc = (await db.get(row.id)) as any as ILogMessage
       expect(doc).toBeDefined()
       expect(doc?.severity).toEqual(SEVERITY.ALERT)
       expect(doc?.facility).toEqual(FACILITY.KERNEL)
