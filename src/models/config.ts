@@ -74,6 +74,10 @@ export interface IArchiverconfig extends ISubComponentConfig {
    * Protocol
    */
   proto?: string
+  /**
+   * List of property keys on a log message to use for partitiong keys in priority listing, fist present will be used
+   */
+  partitionKeyPriorityList?: string[]
 }
 /**
  * System configuration
