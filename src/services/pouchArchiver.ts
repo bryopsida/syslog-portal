@@ -89,14 +89,14 @@ export class PouchArchiver implements ILogMessageListener {
     await this.localDatabase.close()
   }
 
-  getKey(message: Record<string, any>, id: string) : string {
+  getKey(message: Record<string, any>, id: string): string {
     for (const key of this.partitionKeyList) {
       if (message[key] != null) return message[key]
     }
     return id
   }
 
-  getId(message: ILogMessage) : string {
+  getId(message: ILogMessage): string {
     const id = randomUUID()
     return `${this.getKey(message, id)}:${id}`
   }

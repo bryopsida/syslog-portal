@@ -12,11 +12,7 @@
       "username": "admin",
       "password": "admin",
       "databaseFolder": "./data/",
-      "partitionKeyPriorityList": [
-        "app",
-        "hostname",
-        "severity"
-      ]
+      "partitionKeyPriorityList": ["app", "hostname", "severity"]
     },
     "broadcaster": {
       "enabled": true,
