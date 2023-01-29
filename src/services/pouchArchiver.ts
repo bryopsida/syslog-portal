@@ -30,7 +30,7 @@ export class PouchArchiver implements ILogMessageListener {
     this.server = server
     this.log = log
     this.dataFolder = config.archiver.databaseFolder as string
-    this.partitionKeyList = config.archiver.partitionKeyPriorityList as string[]
+    this.partitionKeyList = config.archiver.partitionKeyPriorityList ?? []
     this.localDatabase = this.createDatabase()
     this.remoteDatabase = db
     this.syncInterval = setInterval(
