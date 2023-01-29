@@ -17,6 +17,7 @@ export class PouchArchiver implements ILogMessageListener {
   private remoteDatabase: PouchDB.Database
   private readonly syncInterval: ReturnType<typeof setInterval>
   private readonly dataFolder: string
+  private readonly partitionKeyList: string[]
   private activeLocalDataFolder: string | undefined
 
   constructor(
@@ -29,6 +30,7 @@ export class PouchArchiver implements ILogMessageListener {
     this.server = server
     this.log = log
     this.dataFolder = config.archiver.databaseFolder as string
+    this.partitionKeyList = config.archiver.partitionKeyPriorityList ?? []
     this.localDatabase = this.createDatabase()
     this.remoteDatabase = db
     this.syncInterval = setInterval(
@@ -87,9 +89,21 @@ export class PouchArchiver implements ILogMessageListener {
     await this.localDatabase.close()
   }
 
+  getKey(message: Record<string, any>, id: string): string {
+    for (const key of this.partitionKeyList) {
+      if (message[key] != null) return message[key]
+    }
+    return id
+  }
+
+  getId(message: ILogMessage): string {
+    const id = randomUUID()
+    return `${this.getKey(message, id)}:${id}`
+  }
+
   async onLogMessage(message: ILogMessage): Promise<any> {
     await this.localDatabase.put({
-      _id: message.msgId ?? randomUUID(),
+      _id: this.getId(message),
       app: message.app,
       timestamp: message.timestamp,
       message: message.message,

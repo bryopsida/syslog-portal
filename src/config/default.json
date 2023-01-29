@@ -11,7 +11,8 @@
       "proto": "http",
       "username": "admin",
       "password": "admin",
-      "databaseFolder": "./data/"
+      "databaseFolder": "./data/",
+      "partitionKeyPriorityList": ["app", "hostname", "severity"]
     },
     "broadcaster": {
       "enabled": true,
