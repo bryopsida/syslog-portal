@@ -14,6 +14,15 @@ This is not intended to provide more functionality than parsing syslog messages 
 
 Why make this when system X,Y, or Z can do this? I wanted a minimal but reliable syslog receiver that would be easy for me to configure, runs well on small systems such as a raspberry pi, (both linux/amd64 and linux/arm64 support) and didn't require bringing in a bunch of other systems to use.
 
+## Supported Data Stores
+
+- PouchDB (with syncs to CouchDB)
+- MongoDB
+
+## Supported Data Busses
+
+- Kafka (Planned)
+
 ## NPM Scripts
 
 - `lint`lints the source code using eslint
@@ -81,7 +90,7 @@ The LTS version of node is actively tested/used, previous versions may work but 
 
 It can be run directly with no setup, with defaults by running `syslog-portal`. This will bind a UDP receiver to `0.0.0.0:1514`. Messages received will be cached in a temporary pouchdb, and synced to a couchdb every 5 minutes. The default sync target is `localhost:5984`.
 
-To customize the configuration you can set the NODE_CONFIG_DIR env variable. For example: `NODE_CONFIG_DIR=~/.syslog-portal syslog-portal` and the receiver will use the configuration provided in that directory. The underlying configuration system is using [config](https://github.com/node-config/node-config). For more information on the available configuration values see [TODO](TODO).
+To customize the configuration you can set the NODE_CONFIG_DIR env variable. For example: `NODE_CONFIG_DIR=~/.syslog-portal syslog-portal` and the receiver will use the configuration provided in that directory. The underlying configuration system is using [config](https://github.com/node-config/node-config). For more information on the available configuration values see the configuration models [models](src/models/config.ts). You can also build the documentation with `npm run build:docs` and view an html doc page located [here](docs/index.html), when built.
 
 ## Something isn't working right?
 
