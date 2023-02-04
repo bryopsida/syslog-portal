@@ -1,6 +1,6 @@
 import { inject, injectable, postConstruct, preDestroy } from 'inversify'
-import { IManagedResource } from '../interfaces/managed'
-import { IWatchDog } from '../interfaces/watchDog'
+import { IManagedResource } from '../interfaces/managed.js'
+import { IWatchDog } from '../interfaces/watchDog.js'
 import {
   IncomingMessage,
   Server,
@@ -8,7 +8,7 @@ import {
   createServer,
 } from 'node:http'
 import { Logger } from 'pino'
-import { TYPES } from '../types'
+import { TYPES } from '../types.js'
 
 @injectable()
 export class HealthMonitor implements IWatchDog, IManagedResource {

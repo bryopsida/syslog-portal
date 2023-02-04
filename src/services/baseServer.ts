@@ -1,9 +1,13 @@
-import { EventEmitter } from 'stream'
-import { ILogMessage, ILogMessageListener, IServer } from '../interfaces/server'
-import { IConfig } from '../models/config'
+import { EventEmitter } from 'events'
+import {
+  ILogMessage,
+  ILogMessageListener,
+  IServer,
+} from '../interfaces/server.js'
+import { IConfig } from '../models/config.js'
 import { Logger } from 'pino'
-import { FACILITY, PRI, SEVERITY } from '../models/rfc5424'
-import { IWatchDog } from '../interfaces/watchDog'
+import { FACILITY, PRI, SEVERITY } from '../models/rfc5424.js'
+import { IWatchDog } from '../interfaces/watchDog.js'
 
 const NIL = '-'
 

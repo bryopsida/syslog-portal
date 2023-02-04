@@ -1,10 +1,14 @@
 import { injectable, inject, preDestroy, postConstruct } from 'inversify'
-import { ILogMessage, ILogMessageListener, IServer } from '../interfaces/server'
-import { TYPES } from '../types'
+import {
+  ILogMessage,
+  ILogMessageListener,
+  IServer,
+} from '../interfaces/server.js'
+import { TYPES } from '../types.js'
 import { Logger } from 'pino'
 import PouchDB from 'pouchdb'
 import { randomUUID } from 'crypto'
-import { IConfig } from '../models/config'
+import { IConfig } from '../models/config.js'
 import { mkdirSync } from 'fs'
 import { rmdir } from 'fs/promises'
 import { resolve, join } from 'node:path'

@@ -1,5 +1,5 @@
 import EventEmitter from 'events'
-import { FACILITY, SEVERITY } from '../models/rfc5424'
+import { FACILITY, SEVERITY } from '../models/rfc5424.js'
 
 /**
  * Log message shape

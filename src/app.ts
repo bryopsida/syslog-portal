@@ -1,9 +1,11 @@
+#!/usr/bin/env node
 import { Container } from 'inversify'
-import { TYPES } from './types'
+import { TYPES } from './types.js'
 import { Logger } from 'pino'
-import { IServer, ILogMessageListener } from './interfaces/server'
-import { MetricServer } from './services/metricServer'
-import { ArchiverType, IConfig } from './models/config'
+import { IServer, ILogMessageListener } from './interfaces/server.js'
+import { MetricServer } from './services/metricServer.js'
+import { ArchiverType, IConfig } from './models/config.js'
+import esMain from 'es-main'
 
 export default async function main(appContainer: Container): Promise<void> {
   const server = await appContainer.getAsync<IServer>(TYPES.Services.Server)
@@ -28,8 +30,8 @@ export default async function main(appContainer: Container): Promise<void> {
   log.info('Now serving connections')
 }
 
-if (require.main === module) {
-  const appContainer = require('./inversify.config').appContainer as Container
+if (esMain(import.meta)) {
+  const appContainer = (await import('./inversify.config.js')).appContainer
   const log = appContainer.get<Logger>(TYPES.Logger)
   main(appContainer)
     .then(() => {

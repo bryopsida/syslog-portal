@@ -2,7 +2,7 @@
   "name": "syslog-portal",
   "version": "0.1.0",
   "description": "A portal for ingesting syslog data",
-  "main": "dist/app.js",
+  "exports": "./dist/app.js",
   "type": "module",
   "engines": {
     "npm": ">=8.0.0",
@@ -69,10 +69,14 @@
     "typedoc": "^0.23.23",
     "typescript": "^4.6.2"
   },
+  "bin": {
+    "syslog-portal": "node dist/app.js"
+  },
   "dependencies": {
     "@promster/metrics": "^9.1.6",
     "@promster/server": "^7.0.8",
     "config": "^3.3.8",
+    "es-main": "^1.2.0",
     "generic-pool": "^3.9.0",
     "inversify": "^6.0.1",
     "mongodb": "^5.0.0",

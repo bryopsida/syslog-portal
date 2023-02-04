@@ -1,9 +1,13 @@
 import { injectable, inject, preDestroy, postConstruct } from 'inversify'
-import { ILogMessage, ILogMessageListener, IServer } from '../interfaces/server'
-import { TYPES } from '../types'
+import {
+  ILogMessage,
+  ILogMessageListener,
+  IServer,
+} from '../interfaces/server.js'
+import { TYPES } from '../types.js'
 import { Logger } from 'pino'
 import { MongoClient } from 'mongodb'
-import { IConnPool } from '../interfaces/connPool'
+import { IConnPool } from '../interfaces/connPool.js'
 
 @injectable()
 export class MongoArchiver implements ILogMessageListener {
