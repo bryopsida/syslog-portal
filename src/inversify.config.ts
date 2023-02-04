@@ -20,17 +20,21 @@ import { readFileSync } from 'node:fs'
 import { join } from 'node:path'
 import { homedir } from 'node:os'
 
-const defaultConfig = JSON.parse(readFileSync(join(homedir(),'.syslog-portal','default.json'), {
-  encoding: 'utf8'
-}))
+const defaultConfig = JSON.parse(
+  readFileSync(join(homedir(), '.syslog-portal', 'default.json'), {
+    encoding: 'utf8',
+  })
+)
 
 const appContainer = new Container()
-const appConfig = config.has('server') ? config.get<IConfig>('server') : defaultConfig.server
-const logConfig = config.has('logger') ? config.get<LoggerOptions>('logger') : defaultConfig.logger
+const appConfig = config.has('server')
+  ? config.get<IConfig>('server')
+  : defaultConfig.server
+const logConfig = config.has('logger')
+  ? config.get<LoggerOptions>('logger')
+  : defaultConfig.logger
 
-appContainer
-  .bind<IConfig>(TYPES.Configurations.Main)
-  .toConstantValue(appConfig)
+appContainer.bind<IConfig>(TYPES.Configurations.Main).toConstantValue(appConfig)
 
 appContainer
   .bind<LoggerOptions>(TYPES.Configurations.Logger)
