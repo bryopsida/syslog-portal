@@ -4,7 +4,7 @@
 
 ## What does this do?
 
-This creates a server capable of receiving and parsing syslog messages in RFC 5424 format. The structured data component of RFC 5424 is not yet supported. It can create either a UDP or TCP server, the UDP server is more actively tested. Once launched you can either adjust the log level to output the information to standard IO for another log aggregation system to pick up or save the log messages to `syslog.messages` in mongodb. It can handle thousands of requests per minute with minimal resources: `128mi` and `256m`. This is provided as a container and a [helm chart](https://github.com/bryopsida/helm/tree/main/charts/syslog-portal), and a npm package `npm install @bryopsida/syslog-portal -g`, afterwhich you can run with `syslog-portal`.
+This creates a server capable of receiving and parsing syslog messages in RFC 5424 format. The structured data component of RFC 5424 is not yet supported. It can create either a UDP or TCP server, the UDP server is more actively tested. Once launched you can either adjust the log level to output the information to standard IO for another log aggregation system to pick up or save the log messages to `syslog.messages` in mongodb. It can handle thousands of requests per minute with minimal resources: `128mi` and `256m`. This is provided as a container and a [helm chart](https://github.com/bryopsida/helm/tree/main/charts/syslog-portal), and a npm package `npm install syslog-portal -g`, afterwhich you can run with `syslog-portal`.
 
 ## Intended Scope
 
