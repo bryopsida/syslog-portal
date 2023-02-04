@@ -4,7 +4,7 @@
 
 ## What does this do?
 
-This creates a server capable of receiving and parsing syslog messages in RFC 5424 format. The structured data component of RFC 5424 is not yet supported. It can create either a UDP or TCP server, the UDP server is more actively tested. Once launched you can either adjust the log level to output the information to standard IO for another log aggregation system to pick up or save the log messages to `syslog.messages` in mongodb. It can handle thousands of requests per minute with minimal resources: `128mi` and `256m`. This is provided as a container and a [helm chart](https://github.com/bryopsida/helm/tree/main/charts/syslog-portal), running directly is not supported as to avoid being stuck supporting old versions of node but it is tested against 16 and 18.
+This creates a server capable of receiving and parsing syslog messages in RFC 5424 format. The structured data component of RFC 5424 is not yet supported. It can create either a UDP or TCP server, the UDP server is more actively tested. Once launched you can either adjust the log level to output the information to standard IO for another log aggregation system to pick up or save the log messages to `syslog.messages` in mongodb. It can handle thousands of requests per minute with minimal resources: `128mi` and `256m`. This is provided as a container and a [helm chart](https://github.com/bryopsida/helm/tree/main/charts/syslog-portal), and a npm package `npm install @bryopsida/syslog-portal -g`, afterwhich you can run with `syslog-portal`.
 
 ## Intended Scope
 
@@ -71,6 +71,17 @@ docker run -p 1514:1514 --env "SYSLOG_PORTAL_LOGGER_LEVEL=trace" ghcr.io/bryopsi
 ```
 
 and send your syslog messages to `<your host>:1514`
+
+### Direct Install
+
+If you wish to run directly on a system, you can install with `npm install @bryopsida/syslog-portal -g` this will provide
+the `syslog-portal` command in your path to run the application.
+
+The LTS version of node is actively tested/used, previous versions may work but are not tested.
+
+It can be run directly with no setup, with defaults by running `syslog-portal`. This will bind a UDP receiver to `0.0.0.0:1514`. Messages received will be cached in a temporary pouchdb, and synced to a couchdb every 5 minutes. The default sync target is `localhost:5984`.
+
+To customize the configuration you can set the NODE_CONFIG_DIR env variable. For example: `NODE_CONFIG_DIR=~/.syslog-portal syslog-portal` and the receiver will use the configuration provided in that directory. The underlying configuration system is using [config](https://github.com/node-config/node-config). For more information on the available configuration values see [TODO](TODO).
 
 ## Something isn't working right?
 
