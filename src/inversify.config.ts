@@ -20,11 +20,13 @@ import { readFileSync } from 'node:fs'
 import { join } from 'node:path'
 import { homedir } from 'node:os'
 
-const defaultConfig = config.has('server') ? {} : JSON.parse(
-  readFileSync(join(homedir(), '.syslog-portal', 'default.json'), {
-    encoding: 'utf8',
-  })
-)
+const defaultConfig = config.has('server')
+  ? {}
+  : JSON.parse(
+      readFileSync(join(homedir(), '.syslog-portal', 'default.json'), {
+        encoding: 'utf8',
+      })
+    )
 
 const appContainer = new Container()
 const appConfig = config.has('server')
