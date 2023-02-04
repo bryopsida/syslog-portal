@@ -1,10 +1,10 @@
 import { injectable } from 'inversify'
-import { IServer } from '../interfaces/server'
-import { IConfig, ServerTypeEnum } from '../models/config'
-import { UDPServer } from '../services/udpServer'
-import { TCPServer } from '../services/tcpServer'
+import { IServer } from '../interfaces/server.js'
+import { IConfig, ServerTypeEnum } from '../models/config.js'
+import { UDPServer } from '../services/udpServer.js'
+import { TCPServer } from '../services/tcpServer.js'
 import { Logger } from 'pino'
-import { IWatchDog } from '../interfaces/watchDog'
+import { IWatchDog } from '../interfaces/watchDog.js'
 
 export interface IServerFactory {
   /**

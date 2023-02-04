@@ -13,10 +13,6 @@
       "password": "admin",
       "databaseFolder": "./data/",
       "partitionKeyPriorityList": ["app", "hostname", "severity"]
-    },
-    "broadcaster": {
-      "enabled": true,
-      "type": "KAFKA"
     }
   },
   "logger": {

@@ -1,6 +1,6 @@
 import { inject, injectable } from 'inversify'
 import Pino, { Logger, LoggerOptions } from 'pino'
-import { TYPES } from '../types'
+import { TYPES } from '../types.js'
 
 /**
  * Creates/provides logger instances

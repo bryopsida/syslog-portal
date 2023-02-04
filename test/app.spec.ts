@@ -16,7 +16,7 @@ describe('app', () => {
   let container: Container
   let mockedServer: jest.Mocked<IServer>
   let main: IMain
-  beforeEach(() => {
+  beforeEach(async () => {
     container = new Container()
     mockedServer = jest.mocked<IServer>({
       startListening: () => {
@@ -36,7 +36,7 @@ describe('app', () => {
     container
       .bind<Logger>(TYPES.Logger)
       .toConstantValue(new LoggerFactory({}).createLogger())
-    main = require('../src/app').default
+    main = await (await import('../src/app')).default
   })
   it('should start listening for connections', async () => {
     jest.spyOn(mockedServer, 'startListening').mockImplementation(() => {

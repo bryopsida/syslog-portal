@@ -1,5 +1,5 @@
 import { randomUUID } from 'node:crypto'
-import { BaseServer } from './baseServer'
+import { BaseServer } from './baseServer.js'
 import { RemoteInfo, Socket, createSocket } from 'node:dgram'
 
 export class UDPServer extends BaseServer {

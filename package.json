@@ -1,8 +1,13 @@
 {
   "name": "syslog-portal",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "A portal for ingesting syslog data",
-  "main": "dist/app.js",
+  "exports": "./dist/app.js",
+  "type": "module",
+  "engines": {
+    "npm": ">=8.0.0",
+    "node": ">=18.0.0"
+  },
   "scripts": {
     "start": "node dist/app.js",
     "start:dev": "NODE_CONFIG_DIR=./src/config NODE_ENV=dev nodemon",
@@ -11,7 +16,7 @@
     "build": "node_modules/typescript/bin/tsc --project ./ && mkdir -p dist/config && cp src/config/*.json dist/config/",
     "build:docs": "typedoc src/**/*.ts --exclude node_modules/@types/node/events.d.ts ",
     "build:image": "docker build . -t ghcr.io/bryopsida/syslog-portal:local",
-    "test": "NODE_CONFIG_DIR=$PWD/test/config/ NODE_ENV=test jest --coverage --testPathPattern='test/.*\\.spec\\.ts'",
+    "test": "NODE_CONFIG_DIR=$PWD/test/config/ NODE_ENV=test NODE_OPTIONS=--experimental-vm-modules jest --coverage --testPathPattern='test/.*\\.spec\\.ts'",
     "lint": "eslint --ext .ts src/ test/ && prettier --check .",
     "lint:fix": "eslint --ext .ts src/ test/ --fix && prettier --write ."
   },
@@ -19,6 +24,9 @@
     "type": "git",
     "url": "git+https://github.com/bryopsida/syslog-portal.git"
   },
+  "files": [
+    "dist"
+  ],
   "keywords": [
     "starter",
     "template",
@@ -61,15 +69,39 @@
     "typedoc": "^0.23.23",
     "typescript": "^4.6.2"
   },
+  "bin": {
+    "syslog-portal": "dist/app.js"
+  },
   "dependencies": {
     "@promster/metrics": "^9.1.6",
     "@promster/server": "^7.0.8",
     "config": "^3.3.8",
+    "es-main": "^1.2.0",
     "generic-pool": "^3.9.0",
     "inversify": "^6.0.1",
     "mongodb": "^5.0.0",
     "pino": "^8.8.0",
     "pouchdb": "^8.0.0",
     "reflect-metadata": "^0.1.13"
+  },
+  "jest": {
+    "preset": "ts-jest",
+    "testEnvironment": "node",
+    "testTimeout": 240000,
+    "verbose": true,
+    "moduleNameMapper": {
+      "(.+)\\.js": "$1"
+    },
+    "extensionsToTreatAsEsm": [
+      ".ts"
+    ],
+    "transform": {
+      "\\.[jt]sx?$": [
+        "ts-jest",
+        {
+          "useESM": true
+        }
+      ]
+    }
   }
 }

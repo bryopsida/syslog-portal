@@ -1,5 +1,5 @@
 import { inject, injectable, postConstruct, preDestroy } from 'inversify'
-import { TYPES } from '../types'
+import { TYPES } from '../types.js'
 import { Logger } from 'pino'
 import { createServer } from '@promster/server'
 import { IncomingMessage, Server, ServerResponse } from 'http'

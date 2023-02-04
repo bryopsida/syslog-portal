@@ -1,5 +1,5 @@
 import { randomUUID } from 'node:crypto'
-import { BaseServer } from './baseServer'
+import { BaseServer } from './baseServer.js'
 import { Server, Socket, createServer } from 'node:net'
 
 export class TCPServer extends BaseServer {
