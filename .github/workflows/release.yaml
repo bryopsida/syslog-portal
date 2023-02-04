@@ -9,6 +9,7 @@ jobs:
     secrets:
       SONARQUBE_KEY: ${{ secrets.SONARQUBE_KEY }}
   publish-to-npm:
+    environment: npm
     runs-on: ubuntu-latest
     needs:
       - validate-node
