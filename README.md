@@ -83,7 +83,7 @@ and send your syslog messages to `<your host>:1514`
 
 ### Direct Install
 
-If you wish to run directly on a system, you can install with `npm install @bryopsida/syslog-portal -g` this will provide
+If you wish to run directly on a system, you can install with `npm install syslog-portal -g` this will provide
 the `syslog-portal` command in your path to run the application.
 
 The LTS version of node is actively tested/used, previous versions may work but are not tested.
