@@ -20,7 +20,7 @@ import { readFileSync } from 'node:fs'
 import { join } from 'node:path'
 import { homedir } from 'node:os'
 
-const defaultConfig = JSON.parse(
+const defaultConfig = config.has('server') ? {} : JSON.parse(
   readFileSync(join(homedir(), '.syslog-portal', 'default.json'), {
     encoding: 'utf8',
   })
