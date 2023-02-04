@@ -9,7 +9,7 @@
     "node": ">=18.0.0"
   },
   "scripts": {
-    "postinstall": "cp -R dist/config ~/.syslog-portal",
+    "postinstall": "cp -R src/config ~/.syslog-portal",
     "start": "node dist/app.js",
     "start:dev": "NODE_CONFIG_DIR=./src/config NODE_ENV=dev nodemon",
     "start:services": "docker-compose up -d",

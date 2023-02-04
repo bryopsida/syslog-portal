@@ -17,16 +17,15 @@ import { MongoConnPool } from './services/mongoConnectionPool.js'
 import { PouchArchiver } from './services/pouchArchiver.js'
 import PouchDB from 'pouchdb'
 import { readFileSync } from 'node:fs'
-import { join } from 'node:path'
-import { homedir } from 'node:os'
+import { dirname, join } from 'node:path'
+import { fileURLToPath } from 'node:url'
 
-const defaultConfig = config.has('server')
-  ? {}
-  : JSON.parse(
-      readFileSync(join(homedir(), '.syslog-portal', 'default.json'), {
+const __dirname = dirname(fileURLToPath(import.meta.url));
+
+const defaultConfig = JSON.parse(
+      readFileSync(join(__dirname,'config','default.json'), {
         encoding: 'utf8',
-      })
-    )
+      }))
 
 const appContainer = new Container()
 const appConfig = config.has('server')
