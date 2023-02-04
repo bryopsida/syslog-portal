@@ -28,11 +28,13 @@
     "dist"
   ],
   "keywords": [
-    "starter",
-    "template",
+    "syslog",
+    "rfc5424",
     "typescript",
-    "jest",
-    "inversify"
+    "node",
+    "pouchdb",
+    "couchdb",
+    "mongodb"
   ],
   "author": "",
   "license": "MIT",
