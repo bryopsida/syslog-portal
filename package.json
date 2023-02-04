@@ -4,9 +4,9 @@
   "description": "A portal for ingesting syslog data",
   "main": "dist/app.js",
   "type": "module",
-  "engines" : { 
-    "npm" : ">=8.0.0",
-    "node" : ">=18.0.0"
+  "engines": {
+    "npm": ">=8.0.0",
+    "node": ">=18.0.0"
   },
   "scripts": {
     "start": "node dist/app.js",
@@ -24,7 +24,7 @@
     "type": "git",
     "url": "git+https://github.com/bryopsida/syslog-portal.git"
   },
-  "files":[
+  "files": [
     "dist"
   ],
   "keywords": [
