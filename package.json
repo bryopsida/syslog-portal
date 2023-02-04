@@ -1,6 +1,10 @@
 {
   "name": "syslog-portal",
+<<<<<<< HEAD
   "version": "0.2.7",
+=======
+  "version": "0.2.6",
+>>>>>>> origin/main
   "description": "A portal for ingesting syslog data",
   "exports": "./dist/app.js",
   "type": "module",
@@ -9,7 +13,11 @@
     "node": ">=18.0.0"
   },
   "scripts": {
+<<<<<<< HEAD
     "prepack": "npm run build",
+=======
+    "prepare": "npm run build",
+>>>>>>> origin/main
     "start": "node dist/app.js",
     "start:dev": "NODE_CONFIG_DIR=./src/config NODE_ENV=dev nodemon",
     "start:services": "docker-compose up -d",
