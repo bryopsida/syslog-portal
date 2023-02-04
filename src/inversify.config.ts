@@ -16,18 +16,25 @@ import { MongoClient } from 'mongodb'
 import { MongoConnPool } from './services/mongoConnectionPool.js'
 import { PouchArchiver } from './services/pouchArchiver.js'
 import PouchDB from 'pouchdb'
-import { readFileSync } from 'fs'
+import { readFileSync } from 'node:fs'
+import { join } from 'node:path'
+import { homedir } from 'node:os'
+
+const defaultConfig = JSON.parse(readFileSync(join(homedir(),'.syslog-portal','default.json'), {
+  encoding: 'utf8'
+}))
 
 const appContainer = new Container()
-const appConfig = config.get<IConfig>('server')
+const appConfig = config.has('server') ? config.get<IConfig>('server') : defaultConfig.server
+const logConfig = config.has('logger') ? config.get<LoggerOptions>('logger') : defaultConfig.logger
 
 appContainer
   .bind<IConfig>(TYPES.Configurations.Main)
-  .toConstantValue(config.get<IConfig>('server'))
+  .toConstantValue(appConfig)
 
 appContainer
   .bind<LoggerOptions>(TYPES.Configurations.Logger)
-  .toConstantValue(config.get<LoggerOptions>('logger'))
+  .toConstantValue(logConfig)
 
 appContainer
   .bind<ILoggerFactory>(TYPES.Factories.LoggerFactory)
