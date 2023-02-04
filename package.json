@@ -9,7 +9,7 @@
     "node": ">=18.0.0"
   },
   "scripts": {
-    "prepare": "npm run build",
+    "prepack": "npm run build",
     "start": "node dist/app.js",
     "start:dev": "NODE_CONFIG_DIR=./src/config NODE_ENV=dev nodemon",
     "start:services": "docker-compose up -d",
