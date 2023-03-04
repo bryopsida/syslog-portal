@@ -84,7 +84,7 @@
     "inversify": "^6.0.1",
     "mongodb": "^5.0.1",
     "pino": "^8.9.0",
-    "pouchdb": "^8.0.0",
+    "pouchdb": "^8.0.1",
     "reflect-metadata": "^0.1.13"
   },
   "jest": {
