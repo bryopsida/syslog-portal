@@ -32,7 +32,7 @@ jobs:
       # login to ghcr
       - name: Log into registry
         timeout-minutes: 5
-        uses: docker/login-action@40891eba8c2bcd1309b07ba8b11232f313e86779
+        uses: docker/login-action@465a07811f14bebb1938fbed4728c6a1ff8901fc
         with:
           registry: ghcr.io
           username: ${{ github.actor }}
