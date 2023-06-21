@@ -6,6 +6,10 @@ jobs:
   validate-node:
     name: 'Validate'
     uses: curium-rocks/flows/.github/workflows/node-ts.yml@main
+    permissions:
+      contents: read
+      actions: read
+      security-events: write
     secrets:
       SONARQUBE_KEY: ${{ secrets.SONARQUBE_KEY }}
   publish-to-npm:
@@ -27,6 +31,9 @@ jobs:
     runs-on: ubuntu-latest
     needs:
       - validate-node
+    permissions:
+        contents: read
+        packages: write
     steps:
       - uses: actions/checkout@v3
       # login to ghcr

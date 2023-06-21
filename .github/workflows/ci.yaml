@@ -11,12 +11,21 @@ jobs:
   validate-node:
     name: 'Validate'
     uses: curium-rocks/flows/.github/workflows/node-ts.yml@main
+    permissions:
+      contents: read
+      actions: read
+      security-events: write
     secrets:
       SONARQUBE_KEY: ${{ secrets.SONARQUBE_KEY }}
   build-container:
     name: 'Build container image'
     uses: curium-rocks/flows/.github/workflows/oci-build-image.yml@main
     needs: validate-node
+    permissions:
+      contents: read
+      packages: write
+      security-events: write
+      id-token: write
     with:
       registry: ghcr.io/bryopsida
       image_name: syslog-portal
