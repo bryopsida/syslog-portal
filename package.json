@@ -1,6 +1,6 @@
 {
   "name": "syslog-portal",
-  "version": "0.2.8",
+  "version": "0.2.9",
   "description": "A portal for ingesting syslog data",
   "exports": "./dist/app.js",
   "type": "module",
@@ -86,6 +86,9 @@
     "pino": "^8.9.0",
     "pouchdb": "^8.0.1",
     "reflect-metadata": "^0.1.13"
+  },
+  "overrides": {
+    "semver": "7.5.3"
   },
   "jest": {
     "preset": "ts-jest",
