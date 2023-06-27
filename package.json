@@ -87,6 +87,9 @@
     "pouchdb": "^8.0.1",
     "reflect-metadata": "^0.1.13"
   },
+  "overrides": {
+    "semver": "7.5.3"
+  },
   "jest": {
     "preset": "ts-jest",
     "testEnvironment": "node",
