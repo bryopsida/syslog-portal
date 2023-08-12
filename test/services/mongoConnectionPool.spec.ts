@@ -34,7 +34,7 @@ describe('MongoConnPool', () => {
           },
         },
       },
-      pino()
+      pino(),
     )
     const conn = await pool.connect()
     try {
@@ -68,7 +68,7 @@ describe('MongoConnPool', () => {
           },
         },
       },
-      pino()
+      pino(),
     )
     const client = await pool.connect()
     try {

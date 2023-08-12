@@ -24,7 +24,7 @@ export class MetricServer {
       createGcMetrics.defaultOptions,
       createRequestRecorder.defaultOptions,
       createGcObserver.defaultOptions,
-      defaultNormalizers
+      defaultNormalizers,
     )
     createGcMetrics(allDefaultedOptions)
     createGcObserver(allDefaultedOptions)

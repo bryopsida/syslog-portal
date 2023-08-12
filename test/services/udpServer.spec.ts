@@ -47,7 +47,7 @@ describe('UDPServer', () => {
         },
       },
       logger,
-      monitor
+      monitor,
     )
     await server.startListening()
     const state = {

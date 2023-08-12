@@ -16,7 +16,7 @@ export class MongoConnPool implements IConnPool<MongoClient> {
 
   constructor(
     @inject(TYPES.Configurations.Main) config: IConfig,
-    @inject(TYPES.Logger) log: Logger
+    @inject(TYPES.Logger) log: Logger,
   ) {
     log.info('Creating mongo connection pool')
     this.pool = genericPool.createPool<MongoClient>(this, {
@@ -40,7 +40,7 @@ export class MongoConnPool implements IConnPool<MongoClient> {
       return Promise.resolve(this.config.archiver.username)
     this.log.trace(
       'Reading username from file %s',
-      this.config.archiver.usernameFile
+      this.config.archiver.usernameFile,
     )
     return readFile(resolve(this.config.archiver.usernameFile), {
       encoding: 'utf8',
@@ -52,7 +52,7 @@ export class MongoConnPool implements IConnPool<MongoClient> {
       return Promise.resolve(this.config.archiver.password)
     this.log.trace(
       'Reading password from file %s',
-      this.config.archiver.passwordFile
+      this.config.archiver.passwordFile,
     )
     return readFile(resolve(this.config.archiver.passwordFile), {
       encoding: 'utf8',
@@ -78,7 +78,7 @@ export class MongoConnPool implements IConnPool<MongoClient> {
       this.log.error(
         err,
         'Error occurred while connecting to mongodb %s',
-        err.message
+        err.message,
       )
       throw err
     })
@@ -90,7 +90,7 @@ export class MongoConnPool implements IConnPool<MongoClient> {
       this.log.error(
         err,
         'Error occurred while closing connection to mongodb %s',
-        err.message
+        err.message,
       )
       throw err
     })

@@ -34,7 +34,7 @@ describe('PouchArchiver', () => {
           username: 'admin',
           password: 'admin',
         },
-      }
+      },
     )
 
     const archiver = new PouchArchiver(
@@ -55,7 +55,7 @@ describe('PouchArchiver', () => {
         },
       } as IConfig,
       pino(),
-      db
+      db,
     )
     archiver.setup()
     expect(listener).toBeDefined()

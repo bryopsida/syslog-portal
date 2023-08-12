@@ -74,7 +74,7 @@ export class HealthMonitor implements IWatchDog, IManagedResource {
   register(
     entityId: string,
     humanReadableName: string,
-    expectedCheckInInterval: number
+    expectedCheckInInterval: number,
   ): void {
     this._entities.set(entityId, humanReadableName)
     this._expectedCheckInIntervals.set(entityId, expectedCheckInInterval)

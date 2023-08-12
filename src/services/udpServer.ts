@@ -13,7 +13,7 @@ export class UDPServer extends BaseServer {
       },
       (msg: Buffer, rinfo: RemoteInfo) => {
         this.parseMessage(msg, rinfo)
-      }
+      },
     )
     this._server.bind(this._port, '0.0.0.0')
     this._log.info('Registering with watchdog')

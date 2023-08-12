@@ -33,7 +33,7 @@ describe('MongoArchiver', () => {
           },
         },
       },
-      pino()
+      pino(),
     )
   })
   afterEach(async () => {
@@ -53,7 +53,7 @@ describe('MongoArchiver', () => {
         },
       } as any,
       pino(),
-      pool
+      pool,
     )
     mongoArchiver.setup()
     expect(listener).toBeDefined()
