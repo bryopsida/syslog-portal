@@ -25,7 +25,7 @@ const __dirname = dirname(fileURLToPath(import.meta.url))
 const defaultConfig = JSON.parse(
   readFileSync(join(__dirname, 'config', 'default.json'), {
     encoding: 'utf8',
-  })
+  }),
 )
 
 const appContainer = new Container()
@@ -66,7 +66,7 @@ appContainer
   .bind<Logger>(TYPES.Logger)
   .toDynamicValue((ctx: interfaces.Context) => {
     const factory = ctx.container.get<ILoggerFactory>(
-      TYPES.Factories.LoggerFactory
+      TYPES.Factories.LoggerFactory,
     )
     return factory.createLogger()
   })
@@ -87,7 +87,7 @@ if (appConfig.archiver.enabled) {
       .bind<PouchDB.Database>(TYPES.Connections.Database)
       .toDynamicValue((ctx) => {
         const config: IConfig = ctx.container.get<IConfig>(
-          TYPES.Configurations.Main
+          TYPES.Configurations.Main,
         )
         return new PouchDB(
           `${config.archiver.proto}://${config.archiver.hostname}:${config.archiver.port}/syslog`,
@@ -106,7 +106,7 @@ if (appConfig.archiver.enabled) {
                     })
                   : config.archiver.password,
             },
-          }
+          },
         )
       })
       .inSingletonScope()
@@ -122,12 +122,12 @@ appContainer
   .bind<IServer>(TYPES.Services.Server)
   .toDynamicValue(async (ctx: interfaces.Context) => {
     const factory = ctx.container.get<IServerFactory>(
-      TYPES.Factories.ServerFactory
+      TYPES.Factories.ServerFactory,
     )
     const config = ctx.container.get<IConfig>(TYPES.Configurations.Main)
     const logger = ctx.container.get<Logger>(TYPES.Logger)
     const monitor = await ctx.container.getAsync<IWatchDog>(
-      TYPES.Services.HealthMonitor
+      TYPES.Services.HealthMonitor,
     )
     return factory.createServer(config, logger, monitor)
   })

@@ -13,7 +13,7 @@ export interface IWatchDog {
   register(
     entityId: string,
     humanReadableName: string,
-    expectedCheckInInterval: number
+    expectedCheckInInterval: number,
   ): void
   /**
    * Unregister an entity from the watchdog, this cleans up any timers and resources allocated for watching an entity

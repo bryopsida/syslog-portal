@@ -17,11 +17,11 @@ export default async function main(appContainer: Container): Promise<void> {
   if (config.archiver.enabled) {
     if (config.archiver.type === ArchiverType.MONGO) {
       await appContainer.getAsync<ILogMessageListener>(
-        TYPES.Listeners.MongoArchiver
+        TYPES.Listeners.MongoArchiver,
       )
     } else if (config.archiver.type === ArchiverType.POUCHDB) {
       await appContainer.getAsync<ILogMessageListener>(
-        TYPES.Listeners.PouchArchiver
+        TYPES.Listeners.PouchArchiver,
       )
     }
   }

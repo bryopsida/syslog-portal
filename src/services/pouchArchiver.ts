@@ -28,7 +28,7 @@ export class PouchArchiver implements ILogMessageListener {
     @inject(TYPES.Services.Server) server: IServer,
     @inject(TYPES.Configurations.Main) config: IConfig,
     @inject(TYPES.Logger) log: Logger,
-    @inject(TYPES.Connections.Database) db: PouchDB.Database
+    @inject(TYPES.Connections.Database) db: PouchDB.Database,
   ) {
     log.info('Creating pouchdb archiver')
     this.server = server
@@ -39,7 +39,7 @@ export class PouchArchiver implements ILogMessageListener {
     this.remoteDatabase = db
     this.syncInterval = setInterval(
       this.sync.bind(this),
-      config.archiver.syncInterval
+      config.archiver.syncInterval,
     ) // 5 minute sync
   }
 
@@ -66,7 +66,7 @@ export class PouchArchiver implements ILogMessageListener {
     } catch (err) {
       this.log.error(
         err,
-        'error while syncing to remote, syncing back to local copy'
+        'error while syncing to remote, syncing back to local copy',
       )
       await oldDatabase.replicate.to(this.localDatabase)
     }

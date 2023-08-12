@@ -72,7 +72,7 @@ export abstract class BaseServer extends EventEmitter implements IServer {
       }
       this.emitLogMessage(msgDto).catch((err) => {
         this._log.warn(
-          `Error occurred during event handler chain for log messages: ${err}`
+          `Error occurred during event handler chain for log messages: ${err}`,
         )
       })
     } catch (err: any) {
@@ -80,7 +80,7 @@ export abstract class BaseServer extends EventEmitter implements IServer {
         err,
         'Encountered error while parsing message: %s, incoming message: %s',
         err.message,
-        textData
+        textData,
       )
     }
   }
@@ -111,7 +111,7 @@ export abstract class BaseServer extends EventEmitter implements IServer {
     // does it start with <, if not bail
     if (data[0] !== '<') {
       throw new Error(
-        `Incoming message did not start with <, instead received ${data[0]}`
+        `Incoming message did not start with <, instead received ${data[0]}`,
       )
     }
     // get a shallow copy of just the first 5 characters
@@ -158,7 +158,7 @@ export abstract class BaseServer extends EventEmitter implements IServer {
   protected async emitLogMessage(message: ILogMessage): Promise<void> {
     this._log.debug(
       'Emitting log message event to (%s) listeners',
-      this._listeners.size
+      this._listeners.size,
     )
     for (const listener of this._listeners.values()) {
       this._log.trace('Emitting log message to listener')
@@ -166,7 +166,7 @@ export abstract class BaseServer extends EventEmitter implements IServer {
         this._log.error(
           err,
           'Error occurred while emitting log message to listener: %s',
-          err.message
+          err.message,
         )
         throw err
       })
