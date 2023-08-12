@@ -1,6 +1,9 @@
 import { describe, it, expect, beforeEach, afterEach } from '@jest/globals'
 import 'reflect-metadata'
-import { StartedMongoDBContainer, MongoDBContainer } from 'testcontainers'
+import {
+  StartedMongoDBContainer,
+  MongoDBContainer,
+} from '@testcontainers/mongodb'
 import { MongoConnPool } from '../../src/services/mongoConnectionPool'
 import pino from 'pino'
 import { ArchiverType, ServerTypeEnum } from '../../src/models/config'
