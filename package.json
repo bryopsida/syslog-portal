@@ -44,7 +44,7 @@
   },
   "homepage": "https://github.com/bryopsida/syslog-portal#readme",
   "devDependencies": {
-    "@jest/globals": "29.6.2",
+    "@jest/globals": "29.6.3",
     "@promster/types": "^3.2.5",
     "@testcontainers/mongodb": "^10.2.0",
     "@types/config": "^3.3.0",
