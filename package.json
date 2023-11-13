@@ -78,7 +78,7 @@
   },
   "dependencies": {
     "@promster/metrics": "^10.0.0",
-    "@promster/server": "^9.0.0",
+    "@promster/server": "^12.0.0",
     "config": "^3.3.9",
     "es-main": "^1.2.0",
     "generic-pool": "^3.9.0",
