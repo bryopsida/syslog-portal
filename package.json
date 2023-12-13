@@ -86,7 +86,7 @@
     "mongodb": "^6.0.0",
     "pino": "^8.9.0",
     "pouchdb": "^8.0.1",
-    "reflect-metadata": "^0.1.13"
+    "reflect-metadata": "^0.2.0"
   },
   "overrides": {
     "semver": "7.5.4"
