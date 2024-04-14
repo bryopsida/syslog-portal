@@ -77,8 +77,8 @@
     "syslog-portal": "dist/app.js"
   },
   "dependencies": {
-    "@promster/metrics": "^10.0.0",
-    "@promster/server": "^13.0.0",
+    "@promster/metrics": "^14.0.0",
+    "@promster/server": "^14.0.0",
     "config": "^3.3.9",
     "es-main": "^1.2.0",
     "generic-pool": "^3.9.0",
