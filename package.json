@@ -1,6 +1,6 @@
 {
   "name": "syslog-portal",
-  "version": "0.2.12",
+  "version": "0.2.13",
   "description": "A portal for ingesting syslog data",
   "exports": "./dist/app.js",
   "type": "module",
