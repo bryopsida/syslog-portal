@@ -89,7 +89,7 @@
     "reflect-metadata": "^0.2.0"
   },
   "overrides": {
-    "semver": "7.6.0"
+    "semver": "7.6.2"
   },
   "jest": {
     "preset": "ts-jest",
