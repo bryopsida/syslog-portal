@@ -65,7 +65,7 @@
     "nodemon": "^3.0.0",
     "pino-socket": "^7.3.0",
     "pino-syslog": "^3.0.0",
-    "prettier": "3.2.5",
+    "prettier": "3.3.0",
     "standard": "^17.0.0",
     "testcontainers": "^10.0.0",
     "ts-jest": "29.x",
