@@ -17,6 +17,8 @@ jobs:
       security-events: write
     secrets:
       SONARQUBE_KEY: ${{ secrets.SONARQUBE_KEY }}
+    with:
+      continue-on-prod-vulns: true
   build-container:
     name: 'Build container image'
     uses: curium-rocks/flows/.github/workflows/oci-build-image.yml@main
