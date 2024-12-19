@@ -49,7 +49,7 @@
     "@testcontainers/mongodb": "^10.2.0",
     "@types/config": "^3.3.0",
     "@types/jest": "^29.0.0",
-    "@types/node": "^20.0.0",
+    "@types/node": "^22.0.0",
     "@types/pouchdb": "^6.4.0",
     "@typescript-eslint/eslint-plugin": "^5.15.0",
     "@typescript-eslint/parser": "^5.15.0",
@@ -57,7 +57,7 @@
     "eslint": "^8.30.0",
     "eslint-config-prettier": "^9.0.0",
     "eslint-config-standard-with-typescript": "^37.0.0",
-    "eslint-plugin-github": "^4.6.0",
+    "eslint-plugin-github": "^5.0.0",
     "eslint-plugin-import": "^2.25.4",
     "eslint-plugin-node": "^11.1.0",
     "eslint-plugin-promise": "^6.0.0",
@@ -65,12 +65,12 @@
     "nodemon": "^3.0.0",
     "pino-socket": "^7.3.0",
     "pino-syslog": "^3.0.0",
-    "prettier": "3.3.0",
+    "prettier": "3.4.2",
     "standard": "^17.0.0",
     "testcontainers": "^10.0.0",
     "ts-jest": "29.x",
     "ts-node": "^10.7.0",
-    "typedoc": "^0.25.0",
+    "typedoc": "^0.27.0",
     "typescript": "^5.0.0"
   },
   "bin": {
@@ -85,11 +85,11 @@
     "inversify": "^6.0.1",
     "mongodb": "^6.0.0",
     "pino": "^9.0.0",
-    "pouchdb": "^8.0.1",
+    "pouchdb": "^9.0.0",
     "reflect-metadata": "^0.2.0"
   },
   "overrides": {
-    "semver": "7.6.2"
+    "semver": "7.6.3"
   },
   "jest": {
     "preset": "ts-jest",
