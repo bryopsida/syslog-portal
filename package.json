@@ -83,7 +83,7 @@
     "es-main": "^1.2.0",
     "generic-pool": "^3.9.0",
     "inversify": "^6.0.1",
-    "mongodb": "^6.0.0",
+    "mongodb": "^6.11.0",
     "pino": "^9.0.0",
     "pouchdb": "^9.0.0",
     "reflect-metadata": "^0.2.0"
