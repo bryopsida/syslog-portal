@@ -55,7 +55,7 @@
     "@typescript-eslint/parser": "^5.15.0",
     "axios": "^1.2.2",
     "eslint": "^8.30.0",
-    "eslint-config-prettier": "^9.0.0",
+    "eslint-config-prettier": "^10.0.0",
     "eslint-config-standard-with-typescript": "^37.0.0",
     "eslint-plugin-github": "^5.0.0",
     "eslint-plugin-import": "^2.25.4",
