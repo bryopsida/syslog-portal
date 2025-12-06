@@ -18,7 +18,7 @@ jobs:
     needs:
       - validate-node
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
       - uses: actions/setup-node@v4
         with:
           node-version: 18
@@ -35,7 +35,7 @@ jobs:
       contents: read
       packages: write
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
       # login to ghcr
       - name: Log into registry
         timeout-minutes: 5
