@@ -79,7 +79,7 @@
   "dependencies": {
     "@promster/metrics": "^15.0.0",
     "@promster/server": "^15.0.0",
-    "config": "^3.3.9",
+    "config": "^4.0.0",
     "es-main": "^1.2.0",
     "generic-pool": "^3.9.0",
     "inversify": "^7.0.0",
