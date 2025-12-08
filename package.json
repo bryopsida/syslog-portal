@@ -67,7 +67,7 @@
     "pino-syslog": "^3.0.0",
     "prettier": "3.7.4",
     "standard": "^17.0.0",
-    "testcontainers": "^10.0.0",
+    "testcontainers": "^11.0.0",
     "ts-jest": "29.x",
     "ts-node": "^10.7.0",
     "typedoc": "^0.28.0",
