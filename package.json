@@ -82,7 +82,7 @@
     "config": "^4.0.0",
     "es-main": "^1.2.0",
     "generic-pool": "^3.9.0",
-    "inversify": "^7.0.0",
+    "inversify": "^8.0.0",
     "mongodb": "^7.0.0",
     "pino": "^10.0.0",
     "pouchdb": "^9.0.0",
