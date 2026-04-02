@@ -71,7 +71,7 @@
     "ts-jest": "29.x",
     "ts-node": "^10.7.0",
     "typedoc": "^0.28.0",
-    "typescript": "^5.0.0"
+    "typescript": "^6.0.0"
   },
   "bin": {
     "syslog-portal": "dist/app.js"
